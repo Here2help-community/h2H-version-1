@@ -1,13 +1,10 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
+import { StyleSheet, Text, View } from "react-native";
 import Dark_Button from "../../Items/Buttons/dark-bt";
-import PetTypePicker from "./PetTypePicker";
 import Top_container from "./head";
+import PetTypePicker from "./PetTypePicker";
 
 const Pet_screen5 = (props) => {
-  const navigation = useNavigation();
   const [PetType, SetType] = React.useState("");
   const typeHandler = (item) => {
     SetType(item);
@@ -61,12 +58,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "center",
-    // backgroundColor: "#86EC4F",
   },
   bottomContainer: {
     flex: 1,
     width: "100%",
-    // backgroundColor: "#9811C9",
     paddingHorizontal: "2%",
     paddingTop: "5%",
     justifyContent: "center",

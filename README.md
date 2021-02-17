@@ -45,6 +45,8 @@ Install the projects dependencies
 yarn
 ```
 
+Create a `.env` file based on the [.env.example template](.env.example)
+
 Starting the application
 
 ```bash

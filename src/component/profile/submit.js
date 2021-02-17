@@ -1,17 +1,16 @@
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
   ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Feather } from "@expo/vector-icons";
-import Colors from "../../Items/Colors";
 import Dark_Button from "../../Items/Buttons/dark-bt";
-import { color } from "react-native-reanimated";
+import Colors from "../../Items/Colors";
 
 const UseTextinput = (props) => {
   return <TextInput {...props} editable maxLength={250} />;
@@ -28,9 +27,14 @@ const FeedbackScreen = (props) => {
     <View style={styles.screen}>
       <ScrollView style={{ width: "100%" }}>
         <View style={styles.tophead}>
-
           <TouchableOpacity
-           style={{flex: 1, flexDirection: "row", justifyContent: "flex-start", alignItems: "center", paddingLeft: "2%"}}
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              paddingLeft: "2%",
+            }}
             onPress={() => {
               navigation.goBack();
             }}
@@ -41,13 +45,28 @@ const FeedbackScreen = (props) => {
             </Text>
           </TouchableOpacity>
 
-          <View style={{flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
-          <Text style={styles.top2}>Feedback </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={styles.top2}>Feedback </Text>
           </View>
 
           <View
-          style={{flex: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "center", paddingRight: "2%"}}>
-          <Text style={styles.top3}>Edit </Text></View>
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              paddingRight: "2%",
+            }}
+          >
+            <Text style={styles.top3}>Edit </Text>
+          </View>
         </View>
 
         <View style={styles.mid1}>
@@ -91,7 +110,7 @@ const FeedbackScreen = (props) => {
             <TextInput
               style={styles.input}
               editable={true}
-              keyboardType={'numeric'}
+              keyboardType={"numeric"}
               onChangeText={(text) => onChangePhone(text)}
               placeholder={"   (555) 555- 555"}
               value={phone}
@@ -131,7 +150,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    // padding: "2%",
     paddingTop: "7%",
   },
   tophead: {
@@ -178,24 +196,16 @@ const styles = StyleSheet.create({
   },
 
   top1: {
-    // alignSelf: "center",
     fontSize: 15,
     color: Colors.primary3,
   },
   top2: {
-    // alignSelf: "flex-start",
     fontSize: 15,
-    // alignSelf: "center",
     color: Colors.primary3,
-    // paddingBottom: "1%"
   },
   top3: {
-    // alignSelf: "flex-start",
     fontSize: 15,
     color: Colors.primary3,
-    // alignSelf: "center",
-    // paddingLeft: "2%",
-    // paddingTop: "0.2%"
   },
   mid2: {
     width: "100%",

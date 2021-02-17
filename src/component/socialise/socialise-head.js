@@ -1,14 +1,11 @@
-import React from "react";
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
-
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Colors from "../../Items/Colors";
 
 const Top_container = (props) => {
   const navigation = useNavigation();
-
-  // console.log(props)
 
   return (
     <View style={styles.screen}>
@@ -67,21 +64,18 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "flex-start",
-    // backgroundColor: "#A596D3",
   },
 
   container1: {
     flex: 0.6,
     width: "100%",
     flexDirection: "column",
-    // backgroundColor: "#C6C438",
   },
 
   container2: {
     flex: 0.5,
     width: "100%",
     flexDirection: "column",
-    // backgroundColor: "#A596D3",
   },
 
   container3: {
@@ -89,7 +83,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     width: "100%",
     paddingHorizontal: "2%",
-    // backgroundColor: "#C6C438",
   },
 
   container4: {
@@ -97,7 +90,6 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "column",
     justifyContent: "center",
-    // backgroundColor: "#267DA5",
   },
 
   back: {

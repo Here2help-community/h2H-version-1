@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import SmoothPicker from "react-native-smooth-picker";
-import Colors from  '../../Items/Colors';
+import Colors from "../../Items/Colors";
 
 const dataCity = [
   "1",
@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: '#F5FCFF',
   },
   wrapperVertical: {
     flex: 1,
@@ -128,7 +127,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: "auto",
     color: "black",
-    // backgroundColor: '#218291',
   },
   OptionWrapper: {
     justifyContent: "center",

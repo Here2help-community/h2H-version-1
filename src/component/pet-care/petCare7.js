@@ -1,14 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, Text, View } from "react-native";
 import { RadioButton } from "react-native-paper";
-
 import Dark_Button from "../../Items/Buttons/dark-bt";
 import Colors from "../../Items/Colors";
 import Top_container from "./head";
 
 const Pet_screen7 = (props) => {
-  const navigation = useNavigation();
   const { petName } = props.route.params;
   const toTitleCase = (str) => str[0].toUpperCase() + str.slice(1);
 
@@ -82,7 +79,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignSelf: "center",
-    // backgroundColor: "#86EC4F",
   },
   bottomContainer: {
     flex: 1,
@@ -91,7 +87,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingLeft: "60%",
-    // backgroundColor: "#9811C9",
   },
 
   radioOption: {

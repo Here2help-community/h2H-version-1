@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
   Dimensions,
   StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { useKeyboard } from "react-native-keyboard-height";
-
 import Dark_Button from "../../Items/Buttons/dark-bt";
 import Colors from "../../Items/Colors";
 import Top_container from "./head";
@@ -17,7 +15,6 @@ import Top_container from "./head";
 const screenHeight = Dimensions.get("window").height;
 
 const Pet_screen8 = (props) => {
-  const navigation = useNavigation();
   const [value, onChangeText] = useState("");
 
   // for dynamic flex
@@ -29,7 +26,6 @@ const Pet_screen8 = (props) => {
   const [kbHeight, setKbHeight] = useState(screenHeight);
 
   const didShow = (height) => {
-    // console.log("Keyboard show. Height is " + height);
     // setViewHeight(screenHeight - height);
     // height divide by height of container
     setKbHeight(
@@ -45,7 +41,6 @@ const Pet_screen8 = (props) => {
   };
 
   const didHide = () => {
-    // console.log("Keyboard hide");
     //giving default flex back
     setBottomFlex(1);
     setTopFlex(5);
@@ -104,14 +99,12 @@ const midstyling = (dflex) => {
     flexDirection: "column",
     justifyContent: "flex-start",
     alignSelf: "center",
-    // backgroundColor: "#86EC4F",
   };
 };
 const bottomstyling = (dFlex) => {
   return {
     flex: dFlex,
     width: "100%",
-    // backgroundColor: "#9811C9",
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingTop: "5%",

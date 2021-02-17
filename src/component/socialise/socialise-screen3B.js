@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
+  Dimensions,
   SafeAreaView,
   StatusBar,
-  Dimensions,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
-import Top_container from "./socialise-head";
+import { useKeyboard } from "react-native-keyboard-height";
 import Dark_Button from "../../Items/Buttons/dark-bt";
 import Colors from "../../Items/Colors";
-import { useKeyboard } from "react-native-keyboard-height";
+import Top_container from "./socialise-head";
 
 const screenHeight = Dimensions.get("window").height;
 
@@ -27,7 +27,6 @@ const Social_Screen3B = (props) => {
   const [kbHeight, setKbHeight] = useState(screenHeight);
 
   const didShow = (height) => {
-    // console.log("Keyboard show. Height is " + height);
     // setViewHeight(screenHeight - height);
     // height divide by height of container
     setKbHeight(
@@ -43,7 +42,6 @@ const Social_Screen3B = (props) => {
   };
 
   const didHide = () => {
-    // console.log("Keyboard hide");
     //giving default flex back
     setBottomFlex(1);
     setTopFlex(5);
@@ -101,14 +99,12 @@ const midstyling = (dflex) => {
     flexDirection: "column",
     justifyContent: "flex-start",
     alignSelf: "center",
-    // backgroundColor: "#86EC4F",
   };
 };
 const bottomstyling = (dFlex) => {
   return {
     flex: dFlex,
     width: "100%",
-    // backgroundColor: "#9811C9",
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingTop: "5%",
@@ -141,7 +137,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingTop: "20%",
     paddingHorizontal: "1%",
-    // backgroundColor: "#86EC4F",
   },
   bottom_box: {
     flex: 1,
@@ -150,7 +145,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingLeft: "55%",
-    // backgroundColor: "#9811C9",
   },
   input: {
     fontSize: 20,

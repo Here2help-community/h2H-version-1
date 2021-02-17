@@ -1,18 +1,17 @@
-import { StyleSheet } from 'react-native';
-import Colors from '../../Items/Colors';
+import { StyleSheet } from "react-native";
+import Colors from "../../Items/Colors";
 
 const styles = StyleSheet.create({
-
   label: {
     fontSize: 16,
-    fontFamily: 'Lato-Bold',
+    fontFamily: "Lato-Bold",
     color: Colors.secondary2,
     lineHeight: 24,
   },
 
   input: {
     fontSize: 18,
-    fontFamily: 'Lato-Regular',
+    fontFamily: "Lato-Regular",
     borderBottomColor: Colors.secondary2,
     borderBottomWidth: 1,
     color: Colors.secondary2,
@@ -47,8 +46,7 @@ const styles = StyleSheet.create({
 
   info: {
     color: Colors.info,
-  }
+  },
+});
 
-})
-
-export default styles; 
+export default styles;

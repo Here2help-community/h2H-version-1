@@ -1,11 +1,10 @@
-import React from "react";
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
-
-import Picker from "./picker";
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Dark_Button from "../../Items/Buttons/dark-bt";
 import Colors from "../../Items/Colors";
+import Picker from "./picker";
 
 const Pet_Screen = (props) => {
   const navigation = useNavigation();
@@ -20,8 +19,8 @@ const Pet_Screen = (props) => {
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}>
-            
+          }}
+        >
           <Text style={styles.back}>
             <Feather name="chevron-left" size={15} color={Colors.primary3} />
             Back
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingTop: "7%",
-    padding: '1.8%',
+    padding: "1.8%",
   },
   top: {
     flex: 0.55,
@@ -93,18 +92,15 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "flex-start",
-    // backgroundColor: "#A596D3",
   },
   container1: {
     flex: 0.5,
     width: "100%",
-    // backgroundColor: '#C6C438',
   },
   container2: {
     flex: 2.5,
     flexDirection: "column",
     width: "100%",
-    // backgroundColor: '#A596D3',
   },
   container3: {
     flex: 1.1,
@@ -112,14 +108,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     paddingHorizontal: "2%",
-    // backgroundColor: '#b5ad98',
   },
   container4: {
     flex: 0.53,
     width: "100%",
     flexDirection: "column",
     justifyContent: "center",
-    // backgroundColor: '#267DA5',
   },
   container5: {
     flex: 3,
@@ -127,7 +121,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "center",
-    // backgroundColor: '#86EC4F',
   },
   container6: {
     flex: 0.7,
@@ -136,7 +129,6 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: "2%",
     paddingBottom: "5%",
-    // backgroundColor: '#9811C9',
   },
   back: {
     alignSelf: "flex-start",

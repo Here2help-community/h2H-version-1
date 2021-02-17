@@ -1,16 +1,15 @@
-import React, { useRef, useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import SmoothPicker from 'react-native-smooth-picker';
+import React, { useRef, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import SmoothPicker from "react-native-smooth-picker";
 
 const dataCity = [
-
   // data need to change afterwards
 
-  'Home Cleaning',
-  'Furniture Assembly',
-  'handyman Service',
-  'Moving Help',
-  'TV Mounting',
+  "Home Cleaning",
+  "Furniture Assembly",
+  "handyman Service",
+  "Moving Help",
+  "TV Mounting",
 ];
 
 const opacities = {
@@ -26,22 +25,24 @@ const sizeText = {
   2: 7,
 };
 
-const Item = React.memo(({opacity, selected, vertical, fontSize, name}) => {
+const Item = React.memo(({ opacity, selected, vertical, fontSize, name }) => {
   return (
     <View
-      style={[styles.OptionWrapper, { opacity, borderColor: selected ? '#011131' : 'transparent', width: vertical ? 220 : 'auto'}]}
+      style={[
+        styles.OptionWrapper,
+        {
+          opacity,
+          borderColor: selected ? "#011131" : "transparent",
+          width: vertical ? 220 : "auto",
+        },
+      ]}
     >
-    <Text style={{fontSize}}>
-      {name}
-    </Text>
-  </View>
+      <Text style={{ fontSize }}>{name}</Text>
+    </View>
   );
 });
 
-
-
-
-const ItemToRender = ({item, index}, indexSelected, vertical) => {
+const ItemToRender = ({ item, index }, indexSelected, vertical) => {
   const selected = index === indexSelected;
   const gap = Math.abs(index - indexSelected);
 
@@ -54,11 +55,18 @@ const ItemToRender = ({item, index}, indexSelected, vertical) => {
     fontSize = sizeText[2];
   }
 
-  return <Item opacity={opacity} selected={selected} vertical={vertical} fontSize={fontSize} name={item}/>;
+  return (
+    <Item
+      opacity={opacity}
+      selected={selected}
+      vertical={vertical}
+      fontSize={fontSize}
+      name={item}
+    />
+  );
 };
 
 const Picker = (props) => {
-
   function handleChange(index) {
     setSelected(index);
     refPicker.current.scrollToIndex({
@@ -68,16 +76,14 @@ const Picker = (props) => {
     });
   }
 
-  const [ selected, setSelected ] = useState(1);
+  const [selected, setSelected] = useState(1);
   // this is added if user doesn't happen to select any value
   props.selectType(dataCity[selected]);
 
   const refPicker = useRef(null);
 
   return (
-    
-    <View style={{ ...styles.container, ...props.style}}>
-      
+    <View style={{ ...styles.container, ...props.style }}>
       <View style={styles.wrapperVertical}>
         <SmoothPicker
           initialScrollToIndex={selected}
@@ -88,48 +94,41 @@ const Picker = (props) => {
           data={dataCity}
           scrollAnimatio={false}
           onSelected={({ item, index }) => {
-            handleChange(index),
-            props.selectType(item)
+            handleChange(index), props.selectType(item);
           }}
           selectOnPress={true}
-          renderItem={option => ItemToRender(option, selected, true)}
+          renderItem={(option) => ItemToRender(option, selected, true)}
           magnet={true}
         />
-       
       </View>
-
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: '#F5FCFF',
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   wrapperVertical: {
     flex: 0.9,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 'auto',
-    color: 'black',
-    // backgroundColor: '#218291',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "auto",
+    color: "black",
   },
   OptionWrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 10,
     marginBottom: 10,
     paddingVertical: 10,
     height: 55,
     borderWidth: 3,
     borderRadius: 20,
-    // backgroundColor: '#218291',
   },
 });
 

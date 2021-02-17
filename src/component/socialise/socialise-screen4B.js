@@ -101,14 +101,12 @@ const midstyling = (dflex) => {
     flexDirection: "column",
     justifyContent: "flex-start",
     alignSelf: "center",
-    // backgroundColor: "#86EC4F",
   };
 };
 const bottomstyling = (dFlex) => {
   return {
     flex: dFlex,
     width: "100%",
-    // backgroundColor: "#9811C9",
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingTop: "5%",
@@ -140,7 +138,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingTop: "20%",
     paddingHorizontal: "1%",
-    // backgroundColor: "#86EC4F",
   },
   bottom_box: {
     flex: 1.2,
@@ -149,7 +146,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingLeft: "55%",
-    // backgroundColor: "#9811C9",
   },
   input: {
     fontSize: 20,

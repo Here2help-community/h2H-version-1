@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
-
+import { StyleSheet, Text, View } from "react-native";
+import Dark_Button from "../../Items/Buttons/dark-bt";
 import CalenderComponent from "../CalenderComponent";
 import Top_container from "./socialise-head";
-import Dark_Button from "../../Items/Buttons/dark-bt";
 
 const Social_Screen1B = (props) => {
   const [selectedDate, setDate] = useState("");
@@ -11,7 +10,6 @@ const Social_Screen1B = (props) => {
     setDate(day);
   };
 
-  //console.log(props);
   return (
     <View style={{ ...styles.screen, ...props.style }}>
       <View style={styles.top_box}>
@@ -56,7 +54,6 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "column",
     justifyContent: "center",
-    // backgroundColor: 'rgb(25,5,120)',
   },
   mid_box: {
     flex: 5,
@@ -64,7 +61,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "center",
-    // backgroundColor: "#86EC4F",
   },
   bottom_box: {
     flex: 1,
@@ -73,7 +69,6 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingLeft: "58%",
     paddingHorizontal: "2%",
-    // backgroundColor: "#9811C9",
   },
 });
 

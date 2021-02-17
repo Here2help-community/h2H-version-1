@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Image, SafeAreaView } from "react-native";
-
-import TimePicker from "../timePicker/timePicker";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Dark_Button from "../../Items/Buttons/dark-bt";
-import Top_container from "./Transport_head";
 import Colors from "../../Items/Colors";
 import formatDate from "../formatDate";
+import TimePicker from "../timePicker/timePicker";
+import Top_container from "./Transport_head";
 
 const Transport_screen3 = (props) => {
   console.log(props);
@@ -78,7 +77,6 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     paddingTop: "2.8%",
-    // backgroundColor: '#c65df0'
   },
   mid_box: {
     flex: 5,
@@ -86,7 +84,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "center",
-    // backgroundColor: "#6dc2ed",
   },
   bottom_box: {
     flex: 1,
@@ -95,7 +92,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingLeft: "60%",
-    // backgroundColor: "#6ded8f",
   },
 
   back: {
@@ -107,7 +103,6 @@ const styles = StyleSheet.create({
   head: {
     fontSize: 20,
     fontWeight: "bold",
-    // color: Colors.primary1
   },
   head1: {
     fontSize: 15.2,
@@ -115,7 +110,6 @@ const styles = StyleSheet.create({
   },
   head2: {
     fontSize: 18,
-    //  fontWeight: 'bold',
     color: Colors.primary2,
     justifyContent: "center",
     paddingBottom: "3%",

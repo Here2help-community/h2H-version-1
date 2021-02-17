@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Dimensions,
+  SafeAreaView,
+  StatusBar,
   StyleSheet,
-  View,
   Text,
   TextInput,
-  Dimensions,
-  StatusBar,
-  SafeAreaView,
+  View,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { useKeyboard } from "react-native-keyboard-height";
-
-import Top_container from "./handy_head";
 import Dark_Button from "../../Items/Buttons/dark-bt";
 import Colors from "../../Items/Colors";
+import Top_container from "./handy_head";
 
 const screenHeight = Dimensions.get("window").height;
 
 const HandyWork_Screen4 = (props) => {
-
   console.log(props);
   const [value, onChangeText] = useState();
 
@@ -31,7 +28,6 @@ const HandyWork_Screen4 = (props) => {
   const [kbHeight, setKbHeight] = useState(screenHeight);
 
   const didShow = (height) => {
-    // console.log("Keyboard show. Height is " + height);
     // setViewHeight(screenHeight - height);
     // height divide by height of container
     setKbHeight(
@@ -107,14 +103,12 @@ const midstyling = (dflex) => {
     flexDirection: "column",
     justifyContent: "flex-start",
     alignSelf: "center",
-    // backgroundColor: "#86EC4F",
   };
 };
 const bottomstyling = (dFlex) => {
   return {
     flex: dFlex,
     width: "100%",
-    // backgroundColor: "#9811C9",
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingTop: "5%",
@@ -132,34 +126,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingTop: "7%",
   },
-  // top_box: {
-  //   flex: 5,
-  //   width: "100%",
-  //   flexDirection: "column",
-  //   justifyContent: "center",
-  //   backgroundColor: "rgb(25,5,120)",
-  // },
-
-  // mid_box: {
-  //   flex: 4,
-  //   width: "100%",
-  //   flexDirection: "column",
-  //   justifyContent: "flex-start",
-  //   alignSelf: "center",
-  //   paddingTop: "20%",
-  //   paddingHorizontal: "1%",
-  //   // backgroundColor: "#86EC4F",
-  // },
-  // bottom_box: {
-  //   flex: 1,
-  //   width: "100%",
-  //   flexDirection: "column",
-  //   justifyContent: "center",
-  //   paddingHorizontal: "2%",
-  //   paddingLeft: "60%",
-  //   // backgroundColor: "#9811C9",
-  // },
-
   input: {
     fontSize: 20,
     color: Colors.secondary3,

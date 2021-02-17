@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import Colors from "../Items/Colors";
 
 const Onboard_screen_B = (props) => {
@@ -47,17 +47,14 @@ const styles = StyleSheet.create({
   container1: {
     flex: 3,
     width: "100%",
-    // backgroundColor: "#78b087",
   },
   container2: {
     flex: 1,
     width: "100%",
-    // backgroundColor: "#9e9d59",
   },
   container3: {
     flex: 1.7,
     width: "100%",
-    // backgroundColor: "#bd48ad",
   },
   head1: {
     fontSize: 37,
@@ -66,7 +63,6 @@ const styles = StyleSheet.create({
   },
   head2: {
     fontSize: 15,
-    // fontWeight: "normal",
     color: Colors.primary3,
   },
   line: {
@@ -88,7 +84,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     margin: "5",
-    // backgroundColor: '#1D9F71'
   },
 });
 

@@ -1,22 +1,18 @@
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
-  StyleSheet,
-  View,
-  Text,
   Image,
-  Dimensions,
-  TouchableOpacity,
-  TouchableHighlight,
+  StyleSheet,
+  Text,
   TextInput,
-  SafeAreaView,
+  TouchableOpacity,
+  View,
 } from "react-native";
-
+import Modal from "react-native-modal";
 import Dark_Button from "../../Items/Buttons/dark-bt";
 import Colors from "../../Items/Colors";
-import { useNavigation } from "@react-navigation/native";
-import { Feather } from "@expo/vector-icons";
 import formatDate from "../formatDate";
-import Modal from 'react-native-modal';
 
 const Social_Screen5B = (props) => {
   const navigation = useNavigation();
@@ -78,72 +74,84 @@ const Social_Screen5B = (props) => {
       </View>
       <View style={styles.container3}>
         <Dark_Button
-        onPress={() => {setModalVisible(true);}}
+          onPress={() => {
+            setModalVisible(true);
+          }}
         >
           <Text style={{ fontSize: 18 }}>Submit</Text>
         </Dark_Button>
       </View>
       <Modal
-      isVisible={isModalVisible}
-      animationIn="slideInUp"
-      backdropColor='#2D375B'
-      backdropOpacity={0.7}
-      avoidKeyboard= {false}
-      onBackdropPress={() => setModalVisible(false)}
-      onBackButtonPress={() => {setModalVisible(false)}}
-
+        isVisible={isModalVisible}
+        animationIn="slideInUp"
+        backdropColor="#2D375B"
+        backdropOpacity={0.7}
+        avoidKeyboard={false}
+        onBackdropPress={() => setModalVisible(false)}
+        onBackButtonPress={() => {
+          setModalVisible(false);
+        }}
       >
-
         <View style={styles.cardsection}>
-                <View style={{ flex: 0.5, flexDirection: "column", alignSelf: "flex-end", paddingRight: "2%"}}>
-                  <TouchableOpacity
-                  onPress={() => { setModalVisible(false);}}>
-                  <Feather name="x-circle" size={25} color={Colors.primary3}   />
-                  </TouchableOpacity>
-                  </View>
-                  <View style={{flex: 0.4, flexDirection: "column", }}>
-                <Image
-                  source={require('../h2h/Vector85.png')}
-                  resizeMode= 'contain'
-                   style={{
-                    width: '25%',
-                    height: '25%',
-                    alignSelf: "center",
+          <View
+            style={{
+              flex: 0.5,
+              flexDirection: "column",
+              alignSelf: "flex-end",
+              paddingRight: "2%",
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(false);
+              }}
+            >
+              <Feather name="x-circle" size={25} color={Colors.primary3} />
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 0.4, flexDirection: "column" }}>
+            <Image
+              source={require("../h2h/Vector85.png")}
+              resizeMode="contain"
+              style={{
+                width: "25%",
+                height: "25%",
+                alignSelf: "center",
+              }}
+            />
+          </View>
+          <View style={{ flex: 1.2, flexDirection: "column" }}>
+            <Text style={styles.modaltextcontainer1}>
+              Your request is posted!
+            </Text>
 
+            <Text style={styles.modaltextcontainer2}>
+              We will share your transportation request, so local peple can
+              reach out to you!
+            </Text>
+          </View>
 
-                   }}
-                   /></View>
-                   <View style={{flex: 1.2, flexDirection: "column"}}>
-                   <Text style={styles.modaltextcontainer1}>Your request is posted!</Text>
+          {/* the above view contaisn text */}
+          <View style={styles.modalbottomcontainer}>
+            <TouchableOpacity
+              onPress={() => setModalVisible(false)}
+              activeOpacity={0.2}
+              underlayColor="#596188"
+              style={styles.bottomblock1}
+            >
+              <Text style={{ fontSize: 15 }}>Cancel</Text>
+            </TouchableOpacity>
 
-
-                   <Text style={styles.modaltextcontainer2}>We will share your transportation request,
-                    so local peple can reach out to you!</Text></View>
-
-                {/* the above view contaisn text */}
-                <View style={styles.modalbottomcontainer}>
-                <TouchableOpacity
-                    onPress={() => setModalVisible(false)}
-                    activeOpacity={0.2}
-                    underlayColor="#596188"
-
-                    style={styles.bottomblock1}>
-                    <Text style={{fontSize: 15}}>Cancel</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                    onPress={() => setModalVisible(false)}
-                    activeOpacity={0.2}
-                    underlayColor="#596188"
-
-                     style={styles.bottomblock2}>
-                    <Text style={{fontSize: 15}}>Got it!</Text>
-                    </TouchableOpacity>
-
-                </View>
-                </View>
-
-
+            <TouchableOpacity
+              onPress={() => setModalVisible(false)}
+              activeOpacity={0.2}
+              underlayColor="#596188"
+              style={styles.bottomblock2}
+            >
+              <Text style={{ fontSize: 15 }}>Got it!</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </Modal>
     </View>
   );
@@ -164,18 +172,15 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "flex-start",
-    // backgroundColor: "#A596D3",
   },
   box: {
     width: "100%",
-    //  backgroundColor: "#267DA5",
   },
   container1: {
     flex: 0.6,
     flexDirection: "column",
     justifyContent: "center",
     width: "100%",
-    // backgroundColor: "#C6C438",
   },
   container2: {
     flex: 5.0,
@@ -184,15 +189,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     paddingBottom: "40%",
     paddingHorizontal: "2%",
-    // backgroundColor: "#9811C9",
   },
   container3: {
     flex: 1,
     flexDirection: "column",
     width: "100%",
     paddingLeft: "60%",
-    // paddingBottom: '1%',
-    // backgroundColor: "#C6C438",
   },
   head: {
     fontSize: 26,
@@ -218,11 +220,9 @@ const styles = StyleSheet.create({
     marginRight: "2%",
     marginLeft: "2%",
     flexDirection: "column",
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     justifyContent: "flex-end",
     borderRadius: 20,
-    // width: Dimensions.get('window').width * 0.85 ,
-    // height: Dimensions.get('window').height * 0.25,
   },
 
   modalbottomcontainer: {
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
   },
 
   bottomblock1: {
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderTopWidth: 2,
     borderTopColor: "#e0e0e0",
-    borderBottomLeftRadius: 20
+    borderBottomLeftRadius: 20,
   },
 
   bottomblock2: {
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     borderTopColor: "#e0e0e0",
     borderLeftWidth: 2,
     borderLeftColor: "#e0e0e0",
-    borderBottomEndRadius: 20
+    borderBottomEndRadius: 20,
   },
 
   modaltextcontainer1: {
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     color: Colors.secondary4,
     fontWeight: "bold",
     alignSelf: "center",
-    paddingBottom: "5%"
+    paddingBottom: "5%",
   },
 
   modaltextcontainer2: {
