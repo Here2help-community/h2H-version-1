@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Switch, TouchableOpacity } from "react-native";
-// import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Feather } from "@expo/vector-icons";
 import Colors from "../../Items/Colors";
 import { useNavigation } from '@react-navigation/native'

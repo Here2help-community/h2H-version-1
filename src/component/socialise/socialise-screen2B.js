@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "column",
     justifyContent: "center",
-    // backgroundColor: 'rgb(25,5,120)',
   },
   mid_box: {
     flex: 4,
@@ -85,7 +84,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "center",
-    // backgroundColor: "#86EC4F",
   },
   bottom_box: {
     flex: 1,
@@ -94,7 +92,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingLeft: "55%",
-    // backgroundColor: "#9811C9",
   },
 });
 

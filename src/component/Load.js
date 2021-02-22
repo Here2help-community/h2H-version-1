@@ -1,33 +1,34 @@
+import firebase from "firebase";
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import Dark_Button from "../Items/Buttons/dark-bt";
 import Button2 from "../Items/Buttons/light-bt";
-import firebase from "firebase";
-import mediaStore from '../MediaStore/mediaStore'
+import mediaStore from "../MediaStore/mediaStore";
 
 const Loadscreen = (props) => {
-
   // hooks for media
-  const [image0, setImage] = useState(' ')
+  const [image0, setImage] = useState(" ");
 
-  var defaultString = '.root/in-app-media/';
-  // console.log(defaultString + mediaLocation);
-  var url = firebase.storage().ref(defaultString + 'load1.png').getDownloadURL()
-    .then(url => {
+  var defaultString = ".root/in-app-media/";
+
+  var url = firebase
+    .storage()
+    .ref(defaultString + "load1.png")
+    .getDownloadURL()
+    .then((url) => {
       mediaStore.dispatch({
-        type: 'addMedia',
+        type: "addMedia",
         metadata: {
-          name: 'load1.png',
-          url
-        }
-      })
-      setImage(url)
+          name: "load1.png",
+          url,
+        },
+      });
+      setImage(url);
       // return url
     })
     .catch(function (error) {
       // Handle any errors
     });
-
 
   return (
     <View style={styles.load}>
@@ -35,12 +36,14 @@ const Loadscreen = (props) => {
         source={{
           width: "50%",
           height: "25%",
-          uri: mediaStore.getState()['load1.png'] === undefined ? image0 : mediaStore.getState()['load1.png']
-
+          uri:
+            mediaStore.getState()["load1.png"] === undefined
+              ? image0
+              : mediaStore.getState()["load1.png"],
         }}
         resizeMode={"stretch"}
         style={{
-          bottom: "10%"
+          bottom: "10%",
         }}
       />
       <Text style={styles.intro}>
@@ -79,7 +82,6 @@ const styles = StyleSheet.create({
     width: "100%",
     top: "15%",
     paddingHorizontal: "8%",
-    // backgroundColor: 'blue',
   },
   space: {
     padding: 5,

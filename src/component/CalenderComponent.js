@@ -1,33 +1,25 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
+import { View } from "react-native";
+import { CalendarList } from "react-native-calendars";
 import Colors from "../Items/Colors";
 
 const CalenderComponent = (props) => {
-
   const getMarkedDate = () => {
     return new Date().toISOString().substring(0, 10);
   };
 
   const [markedDate, nextOne] = useState(getMarkedDate(null));
-   // this is added if user doesn't happen to select any value
-   props.getDate(markedDate);
+  // this is added if user doesn't happen to select any value
+  props.getDate(markedDate);
   return (
-    <View style={{
-     
-      
-    }}>
-
+    <View style={{}}>
       <CalendarList
         onDayPress={(day) => {
-          nextOne(day.dateString),
-          props.getDate(day.dateString);
+          nextOne(day.dateString), props.getDate(day.dateString);
         }}
         style={{
-          
-          height: '100%',
+          height: "100%",
         }}
-        
         horizontal={true}
         // Max amount of months allowed to scroll to the past. Default = 50
         pastScrollRange={0}
@@ -46,15 +38,14 @@ const CalenderComponent = (props) => {
           },
         }}
         theme={{
-          backgroundColor: 'black',
-          calendarBackground: '#ffffff',
-          textMonthFontWeight: 'bold',
+          backgroundColor: "black",
+          calendarBackground: "#ffffff",
+          textMonthFontWeight: "bold",
           monthTextColor: Colors.primary2,
           textMonthFontSize: 22,
           textDayFontSize: 15,
         }}
       />
-     
     </View>
   );
 };

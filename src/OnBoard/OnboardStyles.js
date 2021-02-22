@@ -1,7 +1,7 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import Colors from '../Items/Colors';
+import { Dimensions, StyleSheet } from "react-native";
+import Colors from "../Items/Colors";
 
-const dimensions = Dimensions.get('window');
+const dimensions = Dimensions.get("window");
 const windowHeight = dimensions.height;
 
 const OnboardStyles = StyleSheet.create({
@@ -16,7 +16,7 @@ const OnboardStyles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 16,
     height: windowHeight,
-  }, 
+  },
   kb_container: {
     flex: 1,
   },
@@ -29,40 +29,40 @@ const OnboardStyles = StyleSheet.create({
   navigation: {
     flex: 1.5,
   },
-  
+
   logo: {
     flex: 3,
-    marginTop: '8%',
-    marginBottom: '4%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: "8%",
+    marginBottom: "4%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     flex: 1,
-    width: '100%',
-    paddingVertical: '2%',
+    width: "100%",
+    paddingVertical: "2%",
   },
   field_group: {
-    width: '100%',
+    width: "100%",
     marginTop: 16,
   },
   divider_container: {
     height: 13,
-    width: '100%',
+    width: "100%",
     marginVertical: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   divider: {
     height: 2,
-    width: '40%',
-    alignSelf: 'center',
-    backgroundColor: '#C8C8C8',
-  }, 
+    width: "40%",
+    alignSelf: "center",
+    backgroundColor: "#C8C8C8",
+  },
   oauth_group: {
     height: 46,
-    width: '100%',
+    width: "100%",
   },
   navigation_control: {
     flex: 3,
@@ -76,21 +76,21 @@ const OnboardStyles = StyleSheet.create({
   },
   head: {
     fontSize: 40,
-    fontFamily: 'Lato-Black',
+    fontFamily: "Lato-Black",
     color: Colors.primary1,
   },
   progress_bar_filled: {
     height: 3,
-    width: '22%',
+    width: "22%",
     borderRadius: 20,
     backgroundColor: Colors.progress_bar_filled,
   },
   progress_bar: {
     height: 3,
-    width: '22%',
+    width: "22%",
     borderRadius: 20,
     backgroundColor: Colors.progress_bar,
   },
 });
 
-export default OnboardStyles; 
+export default OnboardStyles;

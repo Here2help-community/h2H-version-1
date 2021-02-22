@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: '#F5FCFF',
   },
   wrapperVertical: {
     flex: 1,
@@ -115,7 +114,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: "auto",
     color: "black",
-    // backgroundColor: '#218291',
   },
   OptionWrapper: {
     justifyContent: "center",

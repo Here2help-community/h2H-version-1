@@ -6,16 +6,17 @@ import store_redux_thunk from "../asyncStorage/store";
 import AppText from "../component/AppText/AppText";
 import InputField from "../component/InputField/InputField";
 import Dark_Button from "../Items/Buttons/dark-bt";
-import Colors from "../Items/Colors";
-import styles from "./OnboardStyles";
-
-import { _setPlaceHolderColor } from "./methods";
 import useValidation from "../utils/customHooks/validation";
+import { _setPlaceHolderColor } from "./methods";
+import styles from "./OnboardStyles";
 
 const Onboard_screen4 = (props) => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
-  const [errorField, errorFieldMessage, isValid] = useValidation({ address, phone})
+  const [errorField, errorFieldMessage, isValid] = useValidation({
+    address,
+    phone,
+  });
 
   // hooks for media
   const [image0, setImage] = useState("");
@@ -28,7 +29,9 @@ const Onboard_screen4 = (props) => {
 
   // Save user
   const submitHandler = () => {
-    if (!isValid()) { return false }
+    if (!isValid()) {
+      return false;
+    }
 
     store_redux_thunk.dispatch((dispatch) => {
       dispatch({ type: "showload" });
@@ -99,7 +102,7 @@ const Onboard_screen4 = (props) => {
               label={"Address"}
               secureTextEntry={false}
               placeholder={"Enter here"}
-              placeholderTextColor={ _setPlaceHolderColor("address", errorField) }
+              placeholderTextColor={_setPlaceHolderColor("address", errorField)}
               onChangeText={setAddress}
               error={errorField === "address" && errorFieldMessage}
             ></InputField>
@@ -110,7 +113,7 @@ const Onboard_screen4 = (props) => {
               label={"Telephone"}
               secureTextEntry={false}
               placeholder={"Enter here"}
-              placeholderTextColor={ _setPlaceHolderColor("phone", errorField) }
+              placeholderTextColor={_setPlaceHolderColor("phone", errorField)}
               onChangeText={setPhone}
               keyboardType="phone-pad"
               error={errorField === "phone" && errorFieldMessage}

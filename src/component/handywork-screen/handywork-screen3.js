@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
-
+import { StyleSheet, Text, View } from "react-native";
+import Dark_Button from "../../Items/Buttons/dark-bt";
+import formatDate from "../formatDate";
 import TimePicker from "../timePicker/timePicker";
 import Top_container from "./handy_head";
-import Dark_Button from "../../Items/Buttons/dark-bt";
-import Colors from "../../Items/Colors";
-import formatDate from "../formatDate";
 
 const HandyWork_Screen3 = (props) => {
-  // console.log(props);
-
   const [Hour, setHour] = useState(0);
   const [Minute, setMinute] = useState(0);
   const [Meridian, setMeridian] = useState(0);
@@ -76,7 +72,6 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "column",
     justifyContent: "center",
-    // backgroundColor: 'rgb(25,5,120)',
   },
   mid_box: {
     flex: 5,
@@ -84,7 +79,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "center",
-    // backgroundColor: "#86EC4F",
   },
   bottom_box: {
     flex: 1,
@@ -93,22 +87,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingLeft: "60%",
-    // backgroundColor: "#9811C9",
   },
   back: {
     alignSelf: "flex-start",
     fontSize: 16,
-    // color: Colors.primary2,
   },
   head: {
     fontSize: 26,
     fontWeight: "bold",
-    // color: Colors.primary1,
   },
   head2: {
     alignSelf: "flex-start",
     fontSize: 19,
-    // color: Colors.primary2,
   },
   head3: {
     fontSize: 17.5,

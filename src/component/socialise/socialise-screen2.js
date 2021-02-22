@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import Colors from "../../Items/Colors";
 import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Dark_Button from "../../Items/Buttons/dark-bt";
 import Button2 from "../../Items/Buttons/light-bt";
+import Colors from "../../Items/Colors";
 
 const Social_Screen2 = (props) => {
   const navigation = useNavigation();
@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "flex-start",
     paddingTop: "3%",
-    // backgroundColor: '#A596D3',
   },
   container1: {
     flex: 1,
@@ -102,26 +101,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
     width: "100%",
-    //backgroundColor: '#fcba03',
   },
   container2: {
     flex: 1,
     width: "100%",
     flexDirection: "column",
     justifyContent: "center",
-    //backgroundColor: '#A596D3',
   },
   container3: {
     flex: 5,
     width: "100%",
     flexDirection: "column",
     justifyContent: "center",
-    //backgroundColor: "#fcba03",
   },
   container4: {
     flex: 1.5,
     width: "100%",
-    //backgroundColor: '#A596D3',
     flexDirection: "column",
     justifyContent: "center",
   },
@@ -131,7 +126,6 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "column",
     justifyContent: "center",
-    //backgroundColor: '#fcba03',
   },
 
   head: {

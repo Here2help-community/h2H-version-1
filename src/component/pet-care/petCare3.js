@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
+import { StyleSheet, Text, View } from "react-native";
 import Dark_Button from "../../Items/Buttons/dark-bt";
-import Top_container from "./head";
-import TimePicker from "../timePicker/timePicker";
 import formatDate from "../formatDate";
+import TimePicker from "../timePicker/timePicker";
+import Top_container from "./head";
 
 const Pet_screen3 = (props) => {
-  const navigation = useNavigation();
-
   const [Hour, setHour] = useState(0);
   const [Minute, setMinute] = useState(0);
   const [Meridian, setMeridian] = useState(0);
@@ -84,7 +80,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "center",
-    //backgroundColor: "#86EC4F",
   },
   bottomContainer: {
     flex: 1,
@@ -93,7 +88,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: "2%",
     paddingLeft: "60%",
-    // backgroundColor: "#9811C9",
   },
 });
 

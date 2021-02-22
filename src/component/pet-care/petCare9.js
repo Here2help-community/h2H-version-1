@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import firebase from "firebase";
+import React from "react";
 import {
   StyleSheet,
-  View,
   Text,
-  TouchableOpacity,
   TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
-
-import { useNavigation } from "@react-navigation/native";
-import { Feather } from "@expo/vector-icons";
-import firebase from "firebase"
-
-import store from "../Redux/Store";
-import { NEW_REQUEST } from "../Redux/ActionTypeList";
-import store_redux_thunk from '../../asyncStorage/store'
-import { SIGN_IN, SIGN_OUT, GOOGLE_AUTH, EMAIL_PASSWORD_AUTH, RESTORE_TOKEN } from "../../asyncStorage/actionsList";
-
+import { GOOGLE_AUTH } from "../../asyncStorage/actionsList";
+import store_redux_thunk from "../../asyncStorage/store";
 import Dark_Button from "../../Items/Buttons/dark-bt";
 import Colors from "../../Items/Colors";
 import formatDate from "../formatDate";
+import { NEW_REQUEST } from "../Redux/ActionTypeList";
+import store from "../Redux/Store";
 
 const db = firebase.firestore();
 
@@ -28,32 +25,31 @@ const Pet_screen9 = (props) => {
   const timestring =
     data.time.Hour + ":" + data.time.Minute + " " + data.time.Meridian;
 
-  const checkDuplicacy = query => {
-    let checkType = query.serviceType === 'PetCare';
+  const checkDuplicacy = (query) => {
+    let checkType = query.serviceType === "PetCare";
     let checkDate = query.data.date === data.date;
     let checkTime = query.data.time === data.time;
     let checkName = query.data.petName === data.petName;
     return checkType && checkDate && checkTime && checkName;
-  }
-
+  };
 
   const submitHandler = () => {
     // check duplicacy
     const currentState = store.getState();
-    const Query = currentState.filter(checkDuplicacy)
+    const Query = currentState.filter(checkDuplicacy);
     if (Query.length > 0) {
       console.log("DUPLICATE QUERY");
-      console.log('Query', Query);
+      console.log("Query", Query);
     }
 
-    // if not duplicate request then add to redux 
+    // if not duplicate request then add to redux
     else {
       store.dispatch({
         type: NEW_REQUEST,
         payload: {
           data: { ...data },
           serviceType: "PetCare",
-          id: String(data.date + " " + timestring)
+          id: String(data.date + " " + timestring),
         },
       });
 
@@ -69,29 +65,33 @@ const Pet_screen9 = (props) => {
       const uid = user.uid;
 
       // get the latest data from redux sync
-      const queryData = store.getState()
-      const latestData = queryData[queryData.length - 1]
+      const queryData = store.getState();
+      const latestData = queryData[queryData.length - 1];
 
       // sending user info
-      db
-        .collection('queries')
+      db.collection("queries")
         .doc(uid)
-        .set({
-          userData: { ...user.providerData[0] }
-        }, { merge: true })
+        .set(
+          {
+            userData: { ...user.providerData[0] },
+          },
+          { merge: true }
+        )
         .then(function () {
-          console.log("Document successfully written!")
+          console.log("Document successfully written!");
           // sending data
-          db
-            .collection('queries')
+          db.collection("queries")
             .doc(uid)
-            .collection('service-requests')
-            .doc('for ' + latestData.id)
-            .set({
-              request: latestData
-            }, { merge: true })
+            .collection("service-requests")
+            .doc("for " + latestData.id)
+            .set(
+              {
+                request: latestData,
+              },
+              { merge: true }
+            )
             .then(function () {
-              console.log("Document successfully written!")
+              console.log("Document successfully written!");
             })
             .catch(function (error) {
               console.error("Error adding document: ", error);
@@ -100,10 +100,7 @@ const Pet_screen9 = (props) => {
         .catch(function (error) {
           console.error("Error adding document: ", error);
         });
-
-
     }
-
 
     props.navigation.navigate("PetScreen9");
   };
@@ -212,21 +209,17 @@ const styles = StyleSheet.create({
   container1: {
     flex: 1,
     width: "100%",
-    // backgroundColor: "#C6C438",
   },
   container2: {
     flex: 1.5,
     width: "100%",
-    // backgroundColor: "#A596D3",
   },
   container6: {
     flex: 1.5,
     width: "100%",
     justifyContent: "center",
     paddingHorizontal: "2%",
-    // paddingTop: "5%",
     paddingLeft: "60%",
-    // backgroundColor: "#9811C9",
   },
   head: {
     fontSize: 26,
@@ -250,7 +243,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignSelf: "flex-start",
-    // backgroundColor: "#A596D3",
   },
   back: {
     alignSelf: "flex-start",
@@ -265,7 +257,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   input: {
-    // paddingHorizontal: "5%",
     fontSize: 20,
     color: Colors.secondary3,
     borderBottomColor: "black",

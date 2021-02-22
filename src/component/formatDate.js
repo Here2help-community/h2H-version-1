@@ -1,5 +1,3 @@
-import { TextComponent } from "react-native";
-
 const shortFullPair = {
   mon: "Monday",
   tue: "Tuesday",
