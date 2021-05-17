@@ -1,12 +1,10 @@
-
-
-
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { AppLoading } from "expo";
 import fb from './src/config/firebase';
 import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
-import HomeScreen from "./src/navigation/HomeScreen";
+// import HomeScreen from "./src/navigation/HomeScreen";
+import Onboard_screen from "./src/OnBoard/Onboard_1";
 
 import store from './src/asyncStorage/store'
 import { RESTORE_TOKEN, SIGN_IN, SIGN_OUT, EMAIL_PASSWORD_AUTH, ONBOARD, HOME } from "./src/asyncStorage/actionsList";
@@ -53,5 +51,6 @@ export default function App() {
     return <AppLoading />;
   }
 
-  return <HomeScreen />;
+  // return <HomeScreen />;
+  return <Onboard_screen />;
 }
