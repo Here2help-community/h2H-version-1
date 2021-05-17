@@ -13,11 +13,11 @@ import Chat_Screen from '../servises/chat/chat';
 import Browsing_Screen from '../servises/browsing-requests/browsing-screen';
 import Request_Screen from '../servises/request-screen/request-screen';
 
-import ProfileScreen from '../component/profile/profile';
-import FeedbackScreen from '../component/profile/submit';
-import SubmitScreen from '../component/profile/settings';
-import Terms_component from '../component/profile/terms';
-import PrivacyScreen from '../component/profile/privacy';
+import ProfileScreen from '../component/Profile/Profile';
+import FeedbackScreen from '../component/Profile/submit';
+import SettingsScreen from '../component/Profile/Settings';
+import Terms_component from '../component/Profile/terms';
+import PrivacyScreen from '../component/Profile/privacy';
 
 import Colors from '../Items/Colors';
 import AppText from '../component/AppText/AppText';
@@ -77,7 +77,7 @@ function Profile_component() {
     }}> 
       <ScreenConstant.Screen name='profile' component={ProfileScreen} />
       <ScreenConstant.Screen name='feedback' component={FeedbackScreen} />
-      <ScreenConstant.Screen name='submit' component={SubmitScreen} />
+      <ScreenConstant.Screen name='settings' component={SettingsScreen} />
       <ScreenConstant.Screen name='terms' component={Terms_component} />
       <ScreenConstant.Screen name='privacy' component={PrivacyScreen} />
   </ScreenConstant.Navigator>

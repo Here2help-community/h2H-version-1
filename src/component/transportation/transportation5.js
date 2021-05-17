@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
 
   modaltextcontainer1: {
     fontSize: 24,
-    color: Colors.secondary4,
+    color: Colors.profile_item_text,
     fontWeight: "bold",
     alignSelf: "center",
     paddingBottom: "5%"

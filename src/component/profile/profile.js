@@ -3,47 +3,132 @@ import { useNavigation } from "@react-navigation/native";
 import firebase from "firebase";
 import React, { useEffect, useState } from "react";
 import {
-  ScrollView,
-  StyleSheet,
-  Text,
+  SectionList,
   TouchableOpacity,
   View,
+  SafeAreaView,
+  Platform,
+  Image,
 } from "react-native";
 import { Accessory, Avatar } from "react-native-elements";
 import { GOOGLE_AUTH, SIGN_OUT } from "../../asyncStorage/actionsList";
 import store_redux_thunk from "../../asyncStorage/store";
 import Colors from "../../Items/Colors";
 import fb from '../../config/firebase';
+import StandardListItem from '../ListItems/StandardListItem/StandardListItem'
+import AppText from "../AppText/AppText";
+import styles from './ProfileStyles'
 
 const db = firebase.firestore();
 
-const Box = (props) => {
+const ItemSeparator = () => {
+  return <View style={styles.section_header}></View>
+}
+
+const renderProfileIntro = (props, fullName, photoURL) => {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.block1A} onPress={props.onPress}>
-        <Text
-          style={{
-            alignSelf: "center",
-            fontSize: 15,
-            color: Colors.secondary3,
-          }}
-        >
-          {props.lable1}{" "}
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.block1B} onPress={props.onPress}>
-        <Text
-          style={{
-            alignSelf: "center",
-            fontSize: 15,
-            color: Colors.secondary3,
-          }}
-        >
-          {props.lable2}{" "}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
+    Platform.OS === 'android' && photoURL == null ?
+      <View>
+        <View style={styles.profile_intro_container}>
+          <View
+            style={[styles.profile_avatar, { width: 72, height: 72, borderRadius: 36, justifyContent: 'center' }]}
+          >
+            <AppText style={{ fontSize: 36, color: 'white', textAlign: 'center' }}>{fullName ? fullName.toUpperCase()[0] : ''}</AppText>
+            <TouchableOpacity
+              style={{ position: 'absolute', bottom: 0, right: 0 }}
+              onPress={() => console.log("TODO: Edit profile")}
+            >
+              <Image
+                source={require('../../../assets/images/edit_profile_pic.png')}
+                style={{ width: 10, height: 10 }}
+                resizeMode='contain'
+              />
+            </TouchableOpacity>
+          </View>
+
+          <AppText style={styles.display_name}>{fullName}</AppText>
+
+          <AppText
+            style={styles.autobiography}
+          >
+            Enter short bio here. lorem ispum dolor amet, constructoradipiscing
+            elit. Accuan, urna,viverra, faucibus auctor in euismod id nullam.
+          </AppText>
+        </View>
+        <View style={styles.section_header}></View>
+      </View> :
+      <View>
+        <View style={styles.profile_intro_container}>
+          <Avatar
+            size={72}
+            rounded
+            title={fullName ? fullName.toUpperCase()[0] : ''}
+            source={{
+              uri: photoURL,
+            }}
+            containerStyle={styles.profile_avatar}
+          >
+            <Accessory  
+              onPress={() => console.log("TODO: Edit profile")}
+              // resizeMode='contain'
+              // source={require('../../../assets/images/edit_profile_pic.png')}
+            />
+          </Avatar>
+
+          <AppText style={styles.display_name}>{fullName}</AppText>
+
+          <AppText
+            style={styles.autobiography}
+          >
+            Enter short bio here. lorem ispum dolor amet, constructoradipiscing
+            elit. Accuan, urna,viverra, faucibus auctor in euismod id nullam.
+          </AppText>
+        </View>
+        <View style={styles.section_header}></View>
+      </View>
+  )
+}
+
+const signout = () => {
+  store_redux_thunk.dispatch((dispatch) => {
+    dispatch({ type: "showload" });
+  });
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log("logged out");
+      store_redux_thunk.dispatch((dispatch, getState) => {
+        dispatch({
+          type: SIGN_OUT,
+        });
+        // console.log(getState());
+      });
+    })
+    .catch((error) => {
+      console.log("signout error ", error);
+    });
+};
+
+const deleteAccount = () => {
+  var user = firebase.auth().currentUser;
+
+  store_redux_thunk.dispatch((dispatch) => {
+    dispatch({ type: "showload" });
+  });
+  user
+    .delete()
+    .then(function () {
+      console.log("account deleted");
+      store_redux_thunk.dispatch((dispatch) => {
+        dispatch({
+          type: SIGN_OUT,
+        });
+      });
+    })
+    .catch(function (error) {
+      console.log("account delete error ", error);
+    });
 };
 
 const ProfileScreen = (props) => {
@@ -54,11 +139,10 @@ const ProfileScreen = (props) => {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
-  const [imgLink, setImgLink] = useState(AvatarPlaceholder);
+  const [photoURL, setPhotoURL] = useState("");
 
   const navigation = useNavigation();
-  const AvatarPlaceholder =
-    "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg";
+
   // make user uid as key
   var user = store_redux_thunk.getState().userToken;
   // if a google user then target changes
@@ -66,6 +150,80 @@ const ProfileScreen = (props) => {
   //   user = user.user;
   // }
   const uid = fb.auth().currentUser.uid;
+
+  const DATA = [
+    {
+      title: '',
+      data: [
+        { field: 'First Name', value: fName },
+        { field: 'Last Name', value: lName },
+        { field: 'Email', value: email },
+        {
+          field: 'Change Password',
+          value: <Feather name="chevron-right" size={18} color={Colors.profile_item_text} />,
+          onPress: () => { console.log('TODO: Change password') },
+        },
+        { field: 'Address', value: address },
+        { field: 'Phone', value: phone },
+      ]
+    },
+    {
+      title: '1',
+      data: [
+        {
+          field: 'Settings',
+          value: <Feather name="chevron-right" size={18} color={Colors.profile_item_text} />,
+          onPress: () => navigation.navigate('settings'),
+        },
+      ]
+    },
+    {
+      title: '2',
+      data: [
+        {
+          field: 'Review History',
+          value: '',
+          onPress: () => console.log("TODO: View History"),
+        },
+        { field: 'Times Volunteered', value: 'TODO' },
+        { field: 'Tasks Requested', value: 'TODO' },
+      ]
+    },
+    {
+      title: '3',
+      data: [
+        { field: 'Help',
+          value: '',
+          onPress: () => console.log("TODO: View Help"),
+        },
+        {
+          field: 'Terms of Service',
+          value: '',
+          onPress: () => navigation.navigate('terms'),
+        },
+        {
+          field: 'Privacy Policy',
+          value: '',
+          onPress: () => navigation.navigate('privacy'),
+        },
+        {
+          field: 'Submit Feedback',
+          value: '',
+          onPress: () => navigation.navigate('feedback'),
+        },
+        {
+          field: 'Delete Account',
+          value: '',
+          onPress: () => deleteAccount(),
+        },
+        {
+          field: 'Log out from Account',
+          value: '',
+          onPress: () => signout(),
+        }
+      ]
+    },
+  ]
 
   useEffect(() => {
     var docRef = db
@@ -97,6 +255,7 @@ const ProfileScreen = (props) => {
           setlName(nameSplit[1]);
           setAddress(doc.data().address);
           setPhone(doc.data().phone);
+          setPhotoURL(doc.data().photoURL);
         } else {
           console.log("No such document!");
         }
@@ -104,218 +263,66 @@ const ProfileScreen = (props) => {
       .catch(function (error) {
         console.log("Error getting document:", error);
       });
-  });
-
-  const signout = () => {
-    store_redux_thunk.dispatch((dispatch) => {
-      dispatch({ type: "showload" });
-    });
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        console.log("logged out");
-        store_redux_thunk.dispatch((dispatch, getState) => {
-          dispatch({
-            type: SIGN_OUT,
-          });
-          // console.log(getState());
-        });
-      })
-      .catch((error) => {
-        console.log("signout error ", error);
-      });
-  };
-
-  const deleteAccount = () => {
-    var user = firebase.auth().currentUser;
-
-    store_redux_thunk.dispatch((dispatch) => {
-      dispatch({ type: "showload" });
-    });
-    user
-      .delete()
-      .then(function () {
-        console.log("account deleted");
-        store_redux_thunk.dispatch((dispatch) => {
-          dispatch({
-            type: SIGN_OUT,
-          });
-        });
-      })
-      .catch(function (error) {
-        console.log("account delete error ", error);
-      });
-  };
+  }, []);
 
   return (
-    <View style={styles.screen}>
-      <ScrollView style={{ width: "100%" }}>
-        <View style={styles.containerTop}>
-          <Text style={styles.top1}>
-            <Feather name="chevron-left" size={15} color={Colors.primary2} />{" "}
-            Back{" "}
-          </Text>
-          <Text style={styles.top2}>Profile </Text>
-          <Text style={styles.top3}>Edit </Text>
+    <SafeAreaView style={styles.screen}>
+      <View style={styles.top_navigation}>
+        <TouchableOpacity 
+          onPress={() => props.navigation.goBack()}
+          style={{ width: '33%' }}  
+        >
+          <AppText style={[styles.top_navigation_text, { textAlign: 'left' }]}>
+            <Feather
+              name='chevron-left'
+              size={16}
+              color='white'
+            />
+            Back
+          </AppText>
+        </TouchableOpacity>
+        <View style={{ width: '33%' }}>
+          <AppText style={[styles.top_navigation_header, { textAlign: 'center' }]}>
+            Profile
+          </AppText>
         </View>
+        <TouchableOpacity style={{ width: '33%' }}>
+          <AppText style={[styles.top_navigation_text, { textAlign: 'right' }]}>
+            Edit
+          </AppText>
+        </TouchableOpacity>
+      </View>
 
-        <View style={styles.profile}>
-          <Avatar
-            size={140}
-            rounded
-            source={{
-              uri: imgLink,
-            }}
-          >
-            <Accessory />
-          </Avatar>
-
-          <Text
-            style={{ fontSize: 18, fontWeight: "bold", color: Colors.primary2 }}
-          >
-            {fullName}
-          </Text>
-          <Text></Text>
-          <Text
-            style={{ fontSize: 15, alignSelf: "center", paddingLeft: "3%" }}
-          >
-            Enter short bio here. lorem ispum dolor amet, constructoradipiscing
-            elit. Accuan, urna,viverra, faucibus auctor in euismod id nullam.
-          </Text>
-        </View>
-
-        <Box lable1="FirstName" lable2={fName} />
-        <Box lable1="LastName" lable2={lName} />
-        <Box lable1="Email" lable2={email} />
-        <Box
-          lable1="Change Password"
-          lable2={
-            <Feather name="chevron-right" size={22} color={Colors.secondary3} />
+      <SectionList
+        sections={DATA}
+        keyExtractor={(item, index) => item.field + index }
+        renderItem={
+          ({ item }) => {
+            return (
+              <StandardListItem 
+                field={<AppText style={styles.list_item_text}>{item.field}</AppText>}
+                value={<AppText style={styles.list_item_text}>{item.value}</AppText>}
+                onPress={item.onPress}
+              />
+            )
           }
-        />
-        <Box lable1="Address" lable2={address} />
-        <Box lable1="Phone" lable2={phone} />
-        <Box lable1="Criminal record check" />
-        <View style={styles.spacing}></View>
-        <Box
-          lable1="Settings"
-          lable2={
-            <Feather name="chevron-right" size={22} color={Colors.secondary3} />
+        }
+        ListHeaderComponent={
+          renderProfileIntro(props, fullName, photoURL)
+        }
+        ListFooterComponent={<View style={styles.section_break}></View>}
+        ItemSeparatorComponent={ItemSeparator}
+        renderSectionHeader={
+          ({ section: { title } }) => {
+            return title ?
+              <View style={styles.section_break}></View> :
+              <View></View>
           }
-          onPress={() => {
-            navigation.navigate("submit");
-          }}
-        />
-        <View style={styles.spacing}></View>
-        <Box lable1="Times volunteered" lable2="None done now" />
-        <Box lable1="Tasks Requested" lable2={tasksRequested} />
-        <View style={styles.spacing}></View>
-        <Box lable1="Help" />
-        <Box
-          lable1="Terms of Service "
-          onPress={() => {
-            navigation.navigate("terms");
-          }}
-        />
-        <Box
-          lable1="Privacy Policy"
-          onPress={() => {
-            navigation.navigate("privacy");
-          }}
-        />
-        <Box
-          lable1="Submit Feedback "
-          onPress={() => {
-            navigation.navigate("feedback");
-          }}
-        />
-        <Box lable1="Delete Account" onPress={deleteAccount} />
-        <Box lable1="Log out from Account" onPress={signout} />
-        <View style={styles.spacing}></View>
-      </ScrollView>
-    </View>
+        }
+      />
+
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    width: "100%",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-    marginTop: "7%",
-  },
-  container: {
-    width: "100%",
-    height: 45,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderBottomWidth: 0.5,
-    borderBottomColor: Colors.secondary3,
-  },
-  containerTop: {
-    height: 50,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: Colors.primary4,
-    paddingVertical: "8%",
-    // paddingBottom: "3%"
-  },
-
-  spacing: {
-    width: "100%",
-    paddingVertical: 20,
-    backgroundColor: Colors.primary4,
-  },
-  profile: {
-    width: "100%",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    alignItems: "center",
-    borderBottomWidth: 0.5,
-    borderBottomColor: Colors.secondary3,
-    paddingBottom: "7%",
-    paddingTop: "4%",
-  },
-  top1: {
-    alignSelf: "center",
-    fontSize: 15,
-    color: Colors.primary2,
-  },
-  top2: {
-    alignSelf: "center",
-    fontSize: 15,
-    color: Colors.primary2,
-  },
-  top3: {
-    alignSelf: "center",
-    fontSize: 15,
-    color: Colors.primary2,
-    paddingRight: "1%",
-  },
-  block1: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-  },
-  block2: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  block1A: {
-    alignItems: "center",
-    paddingLeft: "2%",
-  },
-  block1B: {
-    paddingRight: "2%",
-  },
-});
 
 export default ProfileScreen;
