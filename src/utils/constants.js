@@ -5,3 +5,6 @@ export const inValidPasswordMessage = 'password must contain the following:\n' +
     ' - a lower-case letter\n' +
     ' - an upper-case letter\n' +
     ' - a digit; ie.(0-9)\n'
+
+export const FACEBOOK_ID = '210256283877655'
+export const FACEBOOK_VERSION = 'v10.0'

@@ -13,7 +13,6 @@ const OnboardStyles = StyleSheet.create({
     backgroundColor: Colors.secondary_light,
   },
   container: {
-    flex: 1,
     marginHorizontal: 16,
     height: windowHeight,
   }, 

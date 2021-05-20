@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, useWindowDimensions } from 'react-native';
 import Colors from '../Items/Colors';
 import { HORIZONTAL_MARGIN } from './constants';
 
@@ -15,7 +15,6 @@ const OnboardStyles = StyleSheet.create({
     backgroundColor: Colors.secondary_light,
   },
   container: {
-    flex: 1,
     width: windowWidth,
     height: windowHeight,
   }, 

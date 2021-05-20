@@ -13,7 +13,7 @@ import {
 import * as Google from 'expo-google-app-auth'
 
 
-import { RESTORE_TOKEN, SIGN_OUT, SIGN_IN, GOOGLE_AUTH } from "../asyncStorage/actionsList";
+import { RESTORE_TOKEN, SIGN_OUT, SIGN_IN, GOOGLE_AUTH, ONBOARD } from "../asyncStorage/actionsList";
 import store_redux_thunk from "../asyncStorage/store"
 
 import mediaStore from '../MediaStore/mediaStore'
@@ -26,6 +26,8 @@ import AppText from '../component/AppText/AppText';
 import styles from './SignupStyles';
 import { _setPlaceHolderColor } from './methods';
 import useValidation from "../utils/customHooks/validation";
+
+import firebase from 'firebase'
 
 const Onboard_screen1 = (props) => {
   const [fName, setFName] = useState("");

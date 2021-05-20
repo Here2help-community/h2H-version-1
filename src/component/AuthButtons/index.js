@@ -3,8 +3,9 @@ import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { TouchableOpacity, StyleSheet, View, Text, Image, Dimensions } from 'react-native';
 import GoogleIcon from '../../../assets/images/googleIcon.png';
+import { signInWithFacebook } from '../../utils/authMethods';
 
-const { width: SCREEN_WIDTH } = Dimensions.get("screen")
+const { width: SCREEN_WIDTH } = Dimensions.get("window")
 const smallButtonWidth = (SCREEN_WIDTH / 2) - 25
 
 export const FacebookAuthButton = () => (
@@ -26,7 +27,7 @@ export const GoogleAuthButton = () => (
 )
 
 export const FacebookSmallAuthButton = () => (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={signInWithFacebook}>
         <View style={[styles.button, { backgroundColor: "#3C5A99" }]}>
             <Text style={[styles.buttonText, {  color: "#fff" }]}>Login with </Text>
             <FontAwesome name="facebook-f" size={24} color="#fff" style={{ marginTop: 10, }} />

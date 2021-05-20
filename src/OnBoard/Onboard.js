@@ -10,6 +10,7 @@ import Dark_Button from '../Items/Buttons/dark-bt';
 import Onboard_1 from './Onboard_1';
 import Onboard_2 from './Onboard_2';
 import Onboard_3 from './Onboard_3';
+import { signInWithFacebook } from '../utils/authMethods';
 
 const dimensions = Dimensions.get('window');
 const windowWidth = dimensions.width;

@@ -9,10 +9,11 @@ import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
 import HomeScreen from "./src/navigation/HomeScreen";
 
 import store from './src/asyncStorage/store'
-import { RESTORE_TOKEN, SIGN_IN, SIGN_OUT, EMAIL_PASSWORD_AUTH, ONBOARD, HOME } from "./src/asyncStorage/actionsList";
+import { RESTORE_TOKEN, SIGN_IN, SIGN_OUT, EMAIL_PASSWORD_AUTH, ONBOARD, HOME, SIGN_UP } from "./src/asyncStorage/actionsList";
 import MyTabs from "./src/navigation/bottom-navigator";
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { handleAuthStateChange } from "./src/utils/authenticationHandler";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -34,17 +35,18 @@ export default function App() {
         } else {
           if (value === 'true') 
             store.dispatch({ type: ONBOARD })
-          else 
-            fb.auth().onAuthStateChanged((user) => {
-              if (user == null)
-                store.dispatch({ type: SIGN_IN })
-              else 
-                store.dispatch({ type: HOME, authType: EMAIL_PASSWORD_AUTH })
-            });
+          else
+            store.dispatch({ type: SIGN_IN })
+
+          fb.auth().onAuthStateChanged(user => handleAuthStateChange(user))
         }
       }).catch(e => {
         console.log(e)
       })
+  }
+
+  const signout = () => {
+    fb.auth().signOut()
   }
 
   useEffect(dispatchInitialState, [])
