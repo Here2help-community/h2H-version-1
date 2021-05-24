@@ -42,8 +42,10 @@ const handleSignUp = () => {
 
 const handleSignIn = () => {
   const user = fb.auth().currentUser;
+  console.log(user);
   findUserByEmail(user.email)
     .then(result => {
+      console.log(result)
       if (result) {
         store.dispatch({ type: HOME })
       } else {

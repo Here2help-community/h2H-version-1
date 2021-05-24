@@ -46,7 +46,7 @@ export const addUser = (user) => {
   } else {
     return new Promise((resolve, reject) => { 
       db.collection("users")
-        .add(userObj, { merge: true }) 
+        .add(userObj) 
         .then(docRef => {
           resolve(docRef)
         })

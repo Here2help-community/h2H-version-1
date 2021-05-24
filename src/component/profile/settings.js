@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Switch, TouchableOpacity, SafeAreaView, SectionList } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Colors from "../../Items/Colors";

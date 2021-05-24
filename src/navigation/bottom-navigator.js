@@ -14,7 +14,7 @@ import Browsing_Screen from '../servises/browsing-requests/browsing-screen';
 import Request_Screen from '../servises/request-screen/request-screen';
 
 import ProfileScreen from '../component/Profile/Profile';
-import FeedbackScreen from '../component/Profile/submit';
+import FeedbackScreen from '../component/Profile/Feedback';
 import SettingsScreen from '../component/Profile/Settings';
 import Terms_component from '../component/Profile/terms';
 import PrivacyScreen from '../component/Profile/privacy';

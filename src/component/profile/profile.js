@@ -18,6 +18,7 @@ import fb from '../../config/firebase';
 import StandardListItem from '../ListItems/StandardListItem/StandardListItem'
 import AppText from "../AppText/AppText";
 import styles from './ProfileStyles'
+import { findUserByEmail } from "../../data/users";
 
 const db = firebase.firestore();
 
@@ -27,9 +28,9 @@ const ItemSeparator = () => {
 
 const renderProfileIntro = (props, fullName, photoURL) => {
   return (
-    Platform.OS === 'android' && photoURL == null ?
-      <View>
-        <View style={styles.profile_intro_container}>
+    <View>
+      <View style={styles.profile_intro_container}>{ 
+        Platform.OS === 'android' && photoURL == null ?
           <View
             style={[styles.profile_avatar, { width: 72, height: 72, borderRadius: 36, justifyContent: 'center' }]}
           >
@@ -44,21 +45,7 @@ const renderProfileIntro = (props, fullName, photoURL) => {
                 resizeMode='contain'
               />
             </TouchableOpacity>
-          </View>
-
-          <AppText style={styles.display_name}>{fullName}</AppText>
-
-          <AppText
-            style={styles.autobiography}
-          >
-            Enter short bio here. lorem ispum dolor amet, constructoradipiscing
-            elit. Accuan, urna,viverra, faucibus auctor in euismod id nullam.
-          </AppText>
-        </View>
-        <View style={styles.section_header}></View>
-      </View> :
-      <View>
-        <View style={styles.profile_intro_container}>
+          </View> :
           <Avatar
             size={72}
             rounded
@@ -74,18 +61,18 @@ const renderProfileIntro = (props, fullName, photoURL) => {
               // source={require('../../../assets/images/edit_profile_pic.png')}
             />
           </Avatar>
+        }
+        <AppText style={styles.display_name}>{fullName}</AppText>
 
-          <AppText style={styles.display_name}>{fullName}</AppText>
-
-          <AppText
-            style={styles.autobiography}
-          >
-            Enter short bio here. lorem ispum dolor amet, constructoradipiscing
-            elit. Accuan, urna,viverra, faucibus auctor in euismod id nullam.
-          </AppText>
-        </View>
-        <View style={styles.section_header}></View>
+        <AppText
+          style={styles.autobiography}
+        >
+          Enter short bio here. lorem ispum dolor amet, constructoradipiscing
+          elit. Accuan, urna,viverra, faucibus auctor in euismod id nullam.
+        </AppText>
       </View>
+      <View style={styles.section_header}></View>
+    </View> 
   )
 }
 
@@ -242,27 +229,22 @@ const ProfileScreen = (props) => {
         console.log("Error getting document:", error);
       });
 
-    db.collection("users")
-      .doc(uid)
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          let n = doc.data().fullName;
+    findUserByEmail(fb.auth().currentUser.email)
+      .then(user => {
+        if (user) {
+          let n = user.displayName || user.fullName;
           setName(n);
-          setEmail(doc.data().email);
+          setEmail(user.email);
           var nameSplit = n.split(" ");
           setfName(nameSplit[0]);
           setlName(nameSplit[1]);
-          setAddress(doc.data().address);
-          setPhone(doc.data().phone);
-          setPhotoURL(doc.data().photoURL);
-        } else {
-          console.log("No such document!");
+          setAddress(user.address);
+          setPhone(user.phone);
+          setPhotoURL(user.photoURL);
         }
       })
-      .catch(function (error) {
-        console.log("Error getting document:", error);
-      });
+      .catch(e => console.log(e))
+
   }, []);
 
   return (
