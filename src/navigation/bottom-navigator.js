@@ -13,11 +13,11 @@ import Chat_Screen from '../servises/chat/chat';
 import Browsing_Screen from '../servises/browsing-requests/browsing-screen';
 import Request_Screen from '../servises/request-screen/request-screen';
 
-import ProfileScreen from '../component/Profile/Profile';
-import FeedbackScreen from '../component/Profile/Feedback';
-import SettingsScreen from '../component/Profile/Settings';
-import Terms_component from '../component/Profile/terms';
-import PrivacyScreen from '../component/Profile/privacy';
+import ProfileScreen from '../component/profile/Profile';
+import FeedbackScreen from '../component/profile/Feedback';
+import SettingsScreen from '../component/profile/Settings';
+import Terms_component from '../component/profile/Terms';
+import PrivacyScreen from '../component/profile/Privacy';
 
 import Colors from '../Items/Colors';
 import AppText from '../component/AppText/AppText';
