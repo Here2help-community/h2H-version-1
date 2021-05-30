@@ -2,6 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import Colors from '../../Items/Colors';
 
 const dimensions = Dimensions.get('window');
+const topNavigationHeight = 72;
 
 const styles = StyleSheet.create({
 
@@ -18,10 +19,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary2,
     width: '100%',
     paddingHorizontal: 16,
-    paddingTop: 38,
-    // paddingBottom: 16,
+    // paddingTop: 38,
+    paddingBottom: 16,
     justifyContent: 'space-between',
-    // alignItems: 'flex-end',
+    alignItems: 'flex-end',
     flexDirection: 'row',
   },
 
@@ -31,11 +32,11 @@ const styles = StyleSheet.create({
   },
 
   top_navigation_header: {
-    fontSize: 24,
-    color: 'white',
-    fontFamily: 'Lato-Black',
-    // fontSize: 18,
+    // fontSize: 24,
     // color: 'white',
+    fontFamily: 'Lato-Black',
+    fontSize: 18,
+    color: 'white',
   },
 
   profile_intro_container: {
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary2,
   },
 
-  feedback_header_container: {
+  feedback_container: {
     paddingHorizontal: 16,
     alignItems: 'center',
   },
@@ -109,7 +110,30 @@ const styles = StyleSheet.create({
   tos_pp_text: {
     fontSize: 16,
     color: 'black',
-  }
+  },
+
+  tint: {
+    backgroundColor: Colors.tint,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  edit_container: (tabBarHeight) => {
+    return {
+      height: dimensions.height - topNavigationHeight - tabBarHeight,
+      paddingHorizontal: 16,
+    }
+  },
+
+  save_edits_button: {
+    width: '30%', 
+    alignSelf: 'flex-end',
+  },
 
 })
 

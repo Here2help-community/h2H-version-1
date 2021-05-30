@@ -1,7 +1,8 @@
 import fb from '../config/firebase'
 
+const db = fb.firestore()
+
 export const findUserByEmail = (email) => {
-  const db = fb.firestore()
   return new Promise((resolve, reject) => {
     db.collection("users")
       .where("email", "==", email)
@@ -14,11 +15,30 @@ export const findUserByEmail = (email) => {
         }
 
         querySnapshot.forEach(doc => {
-          resolve(doc.data())
+          let user = doc.data()
+          user.uid = doc.id
+          resolve(user)
         })
       })
       .catch(e => { reject (e) })
     })
+}
+
+export const updateUser = (user) => {
+  const userObj = {}
+  Object.keys(user).forEach(key => {
+    userObj[key] = user[key]
+  })
+
+  return new Promise((resolve, reject) => {
+    db.collection("users")
+    .doc(user.uid)
+    .set(userObj, { merge: true })
+    .then(docRef => {
+      resolve(docRef)
+    })
+    .catch(e => reject(e))
+  })
 }
 
 export const addUser = (user) => {
@@ -31,7 +51,6 @@ export const addUser = (user) => {
     providerId: user.providerId,
     uid: user.uid,
   }
-  const db = fb.firestore()
   if (user.uid) {
     return new Promise((resolve, reject) => { 
       db.collection("users")

@@ -12,13 +12,15 @@ import {
 } from "react-native";
 import { Accessory, Avatar } from "react-native-elements";
 import { GOOGLE_AUTH, SIGN_OUT } from "../../asyncStorage/actionsList";
-import store_redux_thunk from "../../asyncStorage/store";
+import store from "../../asyncStorage/store";
 import Colors from "../../Items/Colors";
 import fb from '../../config/firebase';
 import StandardListItem from '../ListItems/StandardListItem/StandardListItem'
 import AppText from "../AppText/AppText";
 import styles from './ProfileStyles'
 import { findUserByEmail } from "../../data/users";
+import Modal from "../Modal/Modal";
+import * as ImagePicker from 'expo-image-picker';
 
 const db = firebase.firestore();
 
@@ -26,7 +28,33 @@ const ItemSeparator = () => {
   return <View style={styles.section_header}></View>
 }
 
-const renderProfileIntro = (props, fullName, photoURL) => {
+const pickImage = async (setPhotoURL) => {
+  try {
+    if (Platform.OS !== 'web') {
+      console.log('imagepicker', ImagePicker)
+      const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
+      }
+    }
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1,
+      base64: true,
+      exif: true,
+    });
+
+    if (!result.cancelled) {
+      setPhotoURL(result.uri);
+    }
+  } catch (e) {
+    console.log(e)
+  }
+};
+
+const renderProfileIntro = (props, fullName, photoURL, setPhotoURL) => {
   return (
     <View>
       <View style={styles.profile_intro_container}>{ 
@@ -37,7 +65,7 @@ const renderProfileIntro = (props, fullName, photoURL) => {
             <AppText style={{ fontSize: 36, color: 'white', textAlign: 'center' }}>{fullName ? fullName.toUpperCase()[0] : ''}</AppText>
             <TouchableOpacity
               style={{ position: 'absolute', bottom: 0, right: 0 }}
-              onPress={() => console.log("TODO: Edit profile")}
+              onPress={() => pickImage(setPhotoURL)}
             >
               <Image
                 source={require('../../../assets/images/edit_profile_pic.png')}
@@ -56,7 +84,7 @@ const renderProfileIntro = (props, fullName, photoURL) => {
             containerStyle={styles.profile_avatar}
           >
             <Accessory  
-              onPress={() => console.log("TODO: Edit profile")}
+              onPress={() => pickImage(setPhotoURL)}
               // resizeMode='contain'
               // source={require('../../../assets/images/edit_profile_pic.png')}
             />
@@ -77,7 +105,7 @@ const renderProfileIntro = (props, fullName, photoURL) => {
 }
 
 const signout = () => {
-  store_redux_thunk.dispatch((dispatch) => {
+  store.dispatch((dispatch) => {
     dispatch({ type: "showload" });
   });
   firebase
@@ -85,7 +113,7 @@ const signout = () => {
     .signOut()
     .then(() => {
       console.log("logged out");
-      store_redux_thunk.dispatch((dispatch, getState) => {
+      store.dispatch((dispatch, getState) => {
         dispatch({
           type: SIGN_OUT,
         });
@@ -100,14 +128,14 @@ const signout = () => {
 const deleteAccount = () => {
   var user = firebase.auth().currentUser;
 
-  store_redux_thunk.dispatch((dispatch) => {
+  store.dispatch((dispatch) => {
     dispatch({ type: "showload" });
   });
   user
     .delete()
     .then(function () {
       console.log("account deleted");
-      store_redux_thunk.dispatch((dispatch) => {
+      store.dispatch((dispatch) => {
         dispatch({
           type: SIGN_OUT,
         });
@@ -128,12 +156,14 @@ const ProfileScreen = (props) => {
   const [phone, setPhone] = useState("");
   const [photoURL, setPhotoURL] = useState("");
 
+  const [showModal, setShowModal] = useState(false);
+
   const navigation = useNavigation();
 
   // make user uid as key
-  var user = store_redux_thunk.getState().userToken;
+  var user = store.getState().userToken;
   // if a google user then target changes
-  // if (store_redux_thunk.getState().authType === GOOGLE_AUTH) {
+  // if (store.getState().authType === GOOGLE_AUTH) {
   //   user = user.user;
   // }
   const uid = fb.auth().currentUser.uid;
@@ -201,7 +231,7 @@ const ProfileScreen = (props) => {
         {
           field: 'Delete Account',
           value: '',
-          onPress: () => deleteAccount(),
+          onPress: () => setShowModal(true),
         },
         {
           field: 'Log out from Account',
@@ -213,37 +243,32 @@ const ProfileScreen = (props) => {
   ]
 
   useEffect(() => {
-    var docRef = db
-      .collection("queries")
-      .doc(uid)
-      .collection("service-requests")
-      .get()
-      .then(function (querySnapshot) {
-        var count = 0;
-        querySnapshot.forEach(function (doc) {
-          count++;
-        });
-        setNoTasks(count);
-      })
-      .catch(function (error) {
-        console.log("Error getting document:", error);
-      });
+    // var docRef = db
+    //   .collection("queries")
+    //   .doc(uid)
+    //   .collection("service-requests")
+    //   .get()
+    //   .then(function (querySnapshot) {
+    //     var count = 0;
+    //     querySnapshot.forEach(function (doc) {
+    //       count++;
+    //     });
+    //     setNoTasks(count);
+    //   })
+    //   .catch(function (error) {
+    //     console.log("Error getting document:", error);
+    //   });
 
-    findUserByEmail(fb.auth().currentUser.email)
-      .then(user => {
-        if (user) {
-          let n = user.displayName || user.fullName;
-          setName(n);
-          setEmail(user.email);
-          var nameSplit = n.split(" ");
-          setfName(nameSplit[0]);
-          setlName(nameSplit[1]);
-          setAddress(user.address);
-          setPhone(user.phone);
-          setPhotoURL(user.photoURL);
-        }
-      })
-      .catch(e => console.log(e))
+    let user = store.getState().user
+    let n = user.displayName || user.fullName;
+    setName(n);
+    setEmail(user.email);
+    var nameSplit = n.split(" ");
+    setfName(nameSplit[0]);
+    setlName(nameSplit[1]);
+    setAddress(user.address);
+    setPhone(user.phone);
+    setPhotoURL(user.photoURL); 
 
   }, []);
 
@@ -251,7 +276,7 @@ const ProfileScreen = (props) => {
     <SafeAreaView style={styles.screen}>
       <View style={styles.top_navigation}>
         <TouchableOpacity 
-          onPress={() => props.navigation.goBack()}
+          onPress={() => navigation.goBack()} 
           style={{ width: '33%' }}  
         >
           <AppText style={[styles.top_navigation_text, { textAlign: 'left' }]}>
@@ -268,7 +293,10 @@ const ProfileScreen = (props) => {
             Profile
           </AppText>
         </View>
-        <TouchableOpacity style={{ width: '33%' }}>
+        <TouchableOpacity 
+          onPress={() => navigation.navigate('editProfile')}
+          style={{ width: '33%' }}
+        >
           <AppText style={[styles.top_navigation_text, { textAlign: 'right' }]}>
             Edit
           </AppText>
@@ -290,7 +318,7 @@ const ProfileScreen = (props) => {
           }
         }
         ListHeaderComponent={
-          renderProfileIntro(props, fullName, photoURL)
+          renderProfileIntro(props, fullName, photoURL, setPhotoURL)
         }
         ListFooterComponent={<View style={styles.section_break}></View>}
         ItemSeparatorComponent={ItemSeparator}
@@ -302,7 +330,25 @@ const ProfileScreen = (props) => {
           }
         }
       />
-
+      {
+        showModal ?
+          <View style={styles.tint}>
+            <Modal
+              header="Are you sure you want to delete"
+              details="This action cannot be undone."
+              cancel="Cancel"
+              confirm="Delete"
+              icon="trashCan"
+              onCancel={() => setShowModal(false)}
+              onConfirm={() => { 
+                console.log("TODO: Delete account") 
+                setShowModal(false)
+              }}
+            ></Modal>
+          </View> :
+          undefined
+      }
+      
     </SafeAreaView>
   );
 };

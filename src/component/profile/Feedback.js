@@ -44,7 +44,7 @@ const FeedbackScreen = (props) => {
         <View style={{ width: '33%' }}></View>
       </View>
 
-      <View style={styles.feedback_header_container}>
+      <View style={styles.feedback_container}>
         <AppText style={styles.feedback_header_text}>Submit feedback</AppText>
         <AppText style={styles.autobiography}>
           We would love to hear from you.If you have any comments,

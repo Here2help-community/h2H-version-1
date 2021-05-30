@@ -18,6 +18,7 @@ import FeedbackScreen from '../component/profile/Feedback';
 import SettingsScreen from '../component/profile/Settings';
 import Terms_component from '../component/profile/Terms';
 import PrivacyScreen from '../component/profile/Privacy';
+import EditProfileScreen from '../component/profile/EditProfile';
 
 import Colors from '../Items/Colors';
 import AppText from '../component/AppText/AppText';
@@ -80,6 +81,7 @@ function Profile_component() {
       <ScreenConstant.Screen name='settings' component={SettingsScreen} />
       <ScreenConstant.Screen name='terms' component={Terms_component} />
       <ScreenConstant.Screen name='privacy' component={PrivacyScreen} />
+      <ScreenConstant.Screen name='editProfile' component={EditProfileScreen} />
   </ScreenConstant.Navigator>
   )
 }

@@ -8,6 +8,7 @@ export default{
   secondary2: '#3A3C42',
   secondary3: '#64666D',
   accent: '#EF2327',
+  tint: '#011138AC',
 
   background: '#FFFFFF',
   background_2: '#F9F9F9',
@@ -38,5 +39,7 @@ export default{
 
   switch_disabled: '#78788029',
   switch_enabled: '#2D375B',
+
+  modal_options_border: '#E0E0E0',
 
 }

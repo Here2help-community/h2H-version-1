@@ -246,7 +246,6 @@ function HomeScreen() {
   // if signed in
   else {
     return (
-
       <NavigationContainer>
         <ScreenConstant.Navigator screenOptions={{ headerShown: false }}>
           {/* <ScreenConstant.Screen name="OB" component={Onboard_screen} /> */}

@@ -19,6 +19,7 @@ export const handleAuthStateChange = async (user) => {
       handleSignIn()
       break
     default:
+      return
   }
 
 }
@@ -42,12 +43,12 @@ const handleSignUp = () => {
 
 const handleSignIn = () => {
   const user = fb.auth().currentUser;
-  console.log(user);
   findUserByEmail(user.email)
     .then(result => {
-      console.log(result)
+      
+
       if (result) {
-        store.dispatch({ type: HOME })
+        store.dispatch({ type: HOME, user: result })
       } else {
         // TODO display this info to the user
         console.log("Account does not exist.")

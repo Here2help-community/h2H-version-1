@@ -12,7 +12,6 @@ const ItemSeparator = () => {
 }
 
 const SettingScreen = (props) => {
-  const navigation = useNavigation();
   const [unitIndex, ToggleUnit] = useState(0);
   const [allowPushNotifications, setAllowPushNotifications] = useState(false);
   const [allowEmailUpdates, setAllowEmailUpdates] = useState(false);

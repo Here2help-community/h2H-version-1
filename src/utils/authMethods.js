@@ -6,6 +6,7 @@ import { EMAIL_PASSWORD_AUTH, HOME } from '../asyncStorage/actionsList';
 import fb from '../config/firebase'
 import * as Facebook from 'expo-facebook';
 import { FACEBOOK_ID, FACEBOOK_VERSION } from './constants';
+import { findUserByEmail } from '../data/users';
 
 export const signInWithGoogle = () => {
 
@@ -55,28 +56,20 @@ export const signInWithFacebook = () => {
 
 }
 
-export const signIn = async ({ email, password }) => {
-    try {
-        const resp = await firebase.auth().signInWithEmailAndPassword(email, password)
-        const user = resp.user
-        store.dispatch((dispatch) => {
-            dispatch({
-                type: HOME,
-                authType: EMAIL_PASSWORD_AUTH,
-            });
-        });
-    } catch (error) {
-        let errorMessage = "There was problem signing you in!"
+export const signIn = ({ email, password }) => {
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .catch(error => {
+      let errorMessage = "There was problem signing you in!"
 
-        if (error.code === "auth/invalid-email") {
-            errorMessage = "Invalid Email provided!"
-        }
-        if (error.code === "auth/wrong-password") {
-            errorMessage = "Check your email or password!"
-        }
-        if (error.code === "auth/user-not-found") {
-            errorMessage = "You are not a registered user!"
-        }
-        throw errorMessage
-    }
+      if (error.code === "auth/invalid-email") {
+          errorMessage = "Invalid Email provided!"
+      }
+      if (error.code === "auth/wrong-password") {
+          errorMessage = "Check your email or password!"
+      }
+      if (error.code === "auth/user-not-found") {
+          errorMessage = "You are not a registered user!"
+      }
+      throw errorMessage
+    })
 }
