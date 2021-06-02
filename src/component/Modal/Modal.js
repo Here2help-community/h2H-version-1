@@ -60,8 +60,10 @@ const Modal = (props) => {
 
       <View style={styles.icon}>{renderIcon()}</View>
 
-      <AppText style={styles.header}>{props.header}</AppText>
-      <AppText style={styles.details}>{props.details}</AppText>
+      <View style={styles.text_container}>
+        <AppText style={styles.header}>{props.header}</AppText>
+        <AppText style={styles.details}>{props.details}</AppText>
+      </View>
 
       <View style={styles.options}>
         <TouchableOpacity

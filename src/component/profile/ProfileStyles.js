@@ -94,12 +94,16 @@ const styles = StyleSheet.create({
   },
 
   feedback_input_area: {
-    width: dimensions.width - 64,
+    width: dimensions.width - 32,
     height: 174,
     marginTop: 32,
-    padding: 12,
     borderWidth: 1,
     borderColor: Colors.primary2,
+    fontFamily: 'Lato-Regular',
+    fontSize: 14,
+    padding: 12,
+    overflow: 'hidden',
+    textAlignVertical: 'top',
   },
 
   tos_pp_container: {

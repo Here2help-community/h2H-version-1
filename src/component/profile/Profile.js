@@ -11,7 +11,7 @@ import {
   Image,
 } from "react-native";
 import { Accessory, Avatar } from "react-native-elements";
-import { GOOGLE_AUTH, SIGN_OUT } from "../../asyncStorage/actionsList";
+import { GOOGLE_AUTH, SIGN_OUT, SIGN_IN } from "../../asyncStorage/actionsList";
 import store from "../../asyncStorage/store";
 import Colors from "../../Items/Colors";
 import fb from '../../config/firebase';
@@ -115,7 +115,7 @@ const signout = () => {
       console.log("logged out");
       store.dispatch((dispatch, getState) => {
         dispatch({
-          type: SIGN_OUT,
+          type: SIGN_IN,
         });
         // console.log(getState());
       });

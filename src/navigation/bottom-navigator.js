@@ -98,7 +98,7 @@ export default function MyTabs(props) {
         style: {
           backgroundColor: '#FFFFFE',
           height: Platform.OS === "ios" ? 100 : 70,
-          bottom: 12,
+          bottom: Platform.OS === 'ios' ? 12 : 0,
         }
       }}
     >

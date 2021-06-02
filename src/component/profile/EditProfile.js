@@ -102,7 +102,11 @@ const SettingScreen = (props) => {
           style={styles.save_edits_button}
         >
           <Dark_Button
-            onPress={() => updateUser({ firstName, lastName, email, address, phone, uid })}
+            onPress={() => { 
+              updateUser({ firstName, lastName, email, address, phone, uid }) 
+                .then()
+                .catch(e => console.log(e))
+            }}
           >Save</Dark_Button>
         </View>
         <View style={{ marginTop: 32 }}></View>

@@ -8,12 +8,14 @@ const styles = StyleSheet.create({
     height: 256,
     borderRadius: 14,
     alignItems: 'center',
-    paddingHorizontal: 28,
     backgroundColor: 'white',
   },
 
   close: {
     position: 'absolute',
+    width: 10,
+    height: 10,
+    borderRadius: 5,
     top: 16,
     right: 24,
   },
@@ -29,6 +31,11 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
+  },
+
+  text_container: {
+    paddingHorizontal: 28,
   },
 
   header: {
@@ -36,12 +43,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato-Bold',
     color: Colors.primary2,
     marginTop: 18,
+    textAlign: 'center',
   },
 
   details: {
     fontSize: 15,
     color: 'black',
     marginTop: 8,
+    textAlign: 'center',
   },
 
   options: {
