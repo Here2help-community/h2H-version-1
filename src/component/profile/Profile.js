@@ -24,21 +24,27 @@ import * as ImagePicker from 'expo-image-picker';
 
 const db = firebase.firestore();
 
+const TAKE_PHOTO = 0
+const CHOOSE_PHOTO = 1
+
 const ItemSeparator = () => {
   return <View style={styles.section_header}></View>
 }
 
-const pickImage = async (setPhotoURL) => {
+const editProfilePic = async (setPhotoURL, option) => {
   try {
-    if (Platform.OS !== 'web') {
-      console.log('imagepicker', ImagePicker)
-      const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+    if (Platform.OS !== 'web') { 
+      if (option === TAKE_PHOTO)
+        const { status } = await ImagePicker.requestCameraPermissionsAsync();
+      if (option === CHOOSE_PHOTO)
+        const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+
       if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');
       }
     }
 
-    let result = await ImagePicker.launchImageLibraryAsync({
+    let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 1,
@@ -54,56 +60,6 @@ const pickImage = async (setPhotoURL) => {
   }
 };
 
-const renderProfileIntro = (props, fullName, photoURL, setPhotoURL) => {
-  return (
-    <View>
-      <View style={styles.profile_intro_container}>{ 
-        Platform.OS === 'android' && photoURL == null ?
-          <View
-            style={[styles.profile_avatar, { width: 72, height: 72, borderRadius: 36, justifyContent: 'center' }]}
-          >
-            <AppText style={{ fontSize: 36, color: 'white', textAlign: 'center' }}>{fullName ? fullName.toUpperCase()[0] : ''}</AppText>
-            <TouchableOpacity
-              style={{ position: 'absolute', bottom: 0, right: 0 }}
-              onPress={() => pickImage(setPhotoURL)}
-            >
-              <Image
-                source={require('../../../assets/images/edit_profile_pic.png')}
-                style={{ width: 10, height: 10 }}
-                resizeMode='contain'
-              />
-            </TouchableOpacity>
-          </View> :
-          <Avatar
-            size={72}
-            rounded
-            title={fullName ? fullName.toUpperCase()[0] : ''}
-            source={{
-              uri: photoURL,
-            }}
-            containerStyle={styles.profile_avatar}
-          >
-            <Accessory  
-              onPress={() => pickImage(setPhotoURL)}
-              // resizeMode='contain'
-              // source={require('../../../assets/images/edit_profile_pic.png')}
-            />
-          </Avatar>
-        }
-        <AppText style={styles.display_name}>{fullName}</AppText>
-
-        <AppText
-          style={styles.autobiography}
-        >
-          Enter short bio here. lorem ispum dolor amet, constructoradipiscing
-          elit. Accuan, urna,viverra, faucibus auctor in euismod id nullam.
-        </AppText>
-      </View>
-      <View style={styles.section_header}></View>
-    </View> 
-  )
-}
-
 const signout = () => {
   store.dispatch((dispatch) => {
     dispatch({ type: "showload" });
@@ -112,13 +68,7 @@ const signout = () => {
     .auth()
     .signOut()
     .then(() => {
-      console.log("logged out");
-      store.dispatch((dispatch, getState) => {
-        dispatch({
-          type: SIGN_IN,
-        });
-        // console.log(getState());
-      });
+      store.dispatch({ type: SIGN_IN })
     })
     .catch((error) => {
       console.log("signout error ", error);
@@ -156,7 +106,8 @@ const ProfileScreen = (props) => {
   const [phone, setPhone] = useState("");
   const [photoURL, setPhotoURL] = useState("");
 
-  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showAccessModal, setShowAccessModal] = useState(false);
 
   const navigation = useNavigation();
 
@@ -231,7 +182,7 @@ const ProfileScreen = (props) => {
         {
           field: 'Delete Account',
           value: '',
-          onPress: () => setShowModal(true),
+          onPress: () => setShowDeleteModal(true),
         },
         {
           field: 'Log out from Account',
@@ -241,6 +192,58 @@ const ProfileScreen = (props) => {
       ]
     },
   ]
+
+
+  const renderProfileIntro = () => {
+    return (
+      <View>
+        <View style={styles.profile_intro_container}>{ 
+          Platform.OS === 'android' && photoURL == null ?
+            <View
+              style={[styles.profile_avatar, { width: 72, height: 72, borderRadius: 36, justifyContent: 'center' }]}
+            >
+              <AppText style={{ fontSize: 36, color: 'white', textAlign: 'center' }}>{fullName ? fullName.toUpperCase()[0] : ''}</AppText>
+              <TouchableOpacity
+                style={{ position: 'absolute', bottom: 0, right: 0 }}
+                onPress={() => setShowAccessModal(true)}
+              >
+                <Image
+                  source={require('../../../assets/images/edit_profile_pic.png')} 
+                  style={{ width: 10, height: 10 }}
+                  resizeMode='contain'
+                />
+              </TouchableOpacity>
+            </View> :
+            <Avatar
+              size={72}
+              rounded
+              title={fullName ? fullName.toUpperCase()[0] : ''}
+              source={{
+                uri: photoURL,
+              }}
+              containerStyle={styles.profile_avatar}
+            >
+              <Accessory  
+                onPress={() => setShowAccessModal(setPhotoURL)}
+                // resizeMode='contain'
+                // source={require('../../../assets/images/edit_profile_pic.png')}
+              />
+            </Avatar>
+          }
+          <AppText style={styles.display_name}>{fullName}</AppText>
+  
+          <AppText
+            style={styles.autobiography}
+          >
+            Enter short bio here. lorem ispum dolor amet, constructoradipiscing
+            elit. Accuan, urna,viverra, faucibus auctor in euismod id nullam.
+          </AppText>
+        </View>
+        <View style={styles.section_header}></View>
+      </View> 
+    )
+  }
+
 
   useEffect(() => {
     // var docRef = db
@@ -318,7 +321,7 @@ const ProfileScreen = (props) => {
           }
         }
         ListHeaderComponent={
-          renderProfileIntro(props, fullName, photoURL, setPhotoURL)
+          renderProfileIntro()
         }
         ListFooterComponent={<View style={styles.section_break}></View>}
         ItemSeparatorComponent={ItemSeparator}
@@ -331,7 +334,7 @@ const ProfileScreen = (props) => {
         }
       />
       {
-        showModal ?
+        showDeleteModal ?
           <View style={styles.tint}>
             <Modal
               header="Are you sure you want to delete"
@@ -339,14 +342,38 @@ const ProfileScreen = (props) => {
               cancel="Cancel"
               confirm="Delete"
               icon="trashCan"
-              onCancel={() => setShowModal(false)}
+              onClose={() => setShowDeleteModal(false)}
+              onCancel={() => setShowDeleteModal(false)}
               onConfirm={() => { 
                 console.log("TODO: Delete account") 
-                setShowModal(false)
+                setShowDeleteModal(false)
               }}
             ></Modal>
           </View> :
           undefined
+      } 
+      {
+        showAccessModal ?
+        <View style={styles.tint}>
+          <Modal
+            header="Upload Profile Picture"
+            details="Where would you like upload your photo from?"
+            cancel="Choose from library"
+            confirm="Take a photo"
+            icon="trashCan"
+            onClose={() => setShowAccessModal(false)}
+            onCancel={() => { 
+              editProfilePic(setPhotoURL, CHOOSE_PHOTO)
+              setShowAccessModal(false)
+            }}
+            onConfirm={() => { 
+              console.log("TODO: Delete account") 
+              editProfilePic(setPhotoURL, TAKE_PHOTO)
+              setShowAccessModal(false)
+            }}
+          ></Modal>
+        </View> :
+        undefined
       }
       
     </SafeAreaView>

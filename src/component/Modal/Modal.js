@@ -19,7 +19,7 @@ const Modal = (props) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.close} onPress={props.onCancel}>
+      <TouchableOpacity style={styles.close} onPress={props.onClose}>
         <View style={{ position: 'absolute' }}>
           <Svg
             width="9.292" 
@@ -68,7 +68,7 @@ const Modal = (props) => {
       <View style={styles.options}>
         <TouchableOpacity
           style={styles.button}
-          onPress={props.onCancel}
+          onPress={props.onClose}
         >
           <AppText style={styles.cancel}>{props.cancel}</AppText>
         </TouchableOpacity>
