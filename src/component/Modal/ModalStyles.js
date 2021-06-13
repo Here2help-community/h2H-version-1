@@ -73,17 +73,20 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
 
   cancel: {
     fontSize: 16,
     color: Colors.primary3,
+    textAlign: 'center',
   },
 
   confirm: { 
     fontSize: 18,
     fontFamily: 'Lato-Bold',
     color: Colors.primary2,
+    textAlign: 'center',
   }
 
 })

@@ -4,7 +4,7 @@ import Colors from '../../Items/Colors';
 const dimensions = Dimensions.get('window');
 const topNavigationHeight = 72;
 
-const styles = StyleSheet.create({
+const styles = {
 
   screen: {
     flex: 1,
@@ -139,6 +139,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
 
-})
+}
 
 export default styles;
