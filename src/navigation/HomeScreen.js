@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { AppLoading } from "expo";
 
-import { ONBOARD, RESTORE_TOKEN, SIGN_IN, SIGN_OUT } from "../asyncStorage/actionsList";
+import {
+  ONBOARD,
+  RESTORE_TOKEN,
+  SIGN_IN,
+  SIGN_OUT,
+} from "../asyncStorage/actionsList";
 import store from "../asyncStorage/store";
 
 import { NavigationContainer } from "@react-navigation/native";
