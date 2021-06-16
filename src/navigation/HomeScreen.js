@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import { AppLoading } from "expo";
-
-import { RESTORE_TOKEN, SIGN_IN, SIGN_OUT } from "../asyncStorage/actionsList";
-import store from "../asyncStorage/store"
 
 import { NavigationContainer } from "@react-navigation/native";
 import {
@@ -11,18 +7,7 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack";
 
-import Onboard from "../OnBoard/Onboard";
-
-import SignUp_Screen_1 from "../OnBoard/onboard_screen1";
-import SignUp_Screen_2 from "../OnBoard/onboard_screen2";
-import SignUp_Screen_3 from "../OnBoard/onboard_screen3";
-import SignUp_Screen_4 from "../OnBoard/onboard_screen4";
-
-import Loadscreen from "../component/Load";
-import Volunteer from "../component/Volunteer";
-import Victim from "../component/Help-need";
 import MyTabs from "./bottom-navigator";
-
 
 import Social_Screen from "../component/socialise/socialise-screen";
 import Social_Screen2 from "../component/socialise/socialise-screen2";
@@ -55,10 +40,6 @@ import Transport_screen2 from "../component/transportation/transportation2";
 import Transport_screen3 from "../component/transportation/transportation3";
 import Transport_screen4 from "../component/transportation/transportation4";
 import Transport_screen5 from "../component/transportation/transportation5";
-
-import { LOGIN_SCREEN, SIGNUP_SCREEN1, SIGNUP_SCREEN2, SIGNUP_SCREEN3, SIGNUP_SCREEN4 } from './screenNames'
-import Login from "../component/Login";
-import { getData } from "../utils/state/preferences";
 
 const ScreenConstant = createStackNavigator();
 
@@ -203,48 +184,6 @@ function TransportScreen() {
 
 function HomeScreen() {
 
-  const [refresh, refresher] = useState(0)
-
-  const currentState = store.getState();
-
-  store.subscribe(() => {
-    console.log(currentState);
-    refresher(refresh + 1);
-  })
-
-  if (currentState.isLoading) {
-    return <AppLoading />;
-  }
-
-  if (currentState.isNewUser && currentState.isSignedOut) {
-    return <Onboard />;
-  }
-
-  if (!currentState.hasAccount && currentState.isSignedOut) {
-    return (
-      <NavigationContainer>
-        <ScreenConstant.Navigator screenOptions={{ headerShown: false }}>
-          <ScreenConstant.Screen name={SIGNUP_SCREEN1} component={SignUp_Screen_1} />
-          <ScreenConstant.Screen name={SIGNUP_SCREEN2} component={SignUp_Screen_2} />
-          <ScreenConstant.Screen name={SIGNUP_SCREEN3} component={SignUp_Screen_3} />
-          <ScreenConstant.Screen name={SIGNUP_SCREEN4} component={SignUp_Screen_4} />
-        </ScreenConstant.Navigator>
-      </NavigationContainer>
-    )
-  }
-
-  if (currentState.isSignedOut) {
-    return (
-      <NavigationContainer>
-        <ScreenConstant.Navigator screenOptions={{ headerShown: false }}>
-          <ScreenConstant.Screen name={LOGIN_SCREEN} component={Login} />
-        </ScreenConstant.Navigator>
-      </NavigationContainer>
-    )
-  }
-
-  // if signed in
-  else {
     return (
       <NavigationContainer>
         <ScreenConstant.Navigator screenOptions={{ headerShown: false }}>
@@ -289,7 +228,6 @@ function HomeScreen() {
         </ScreenConstant.Navigator>
       </NavigationContainer>
     );
-  }
 
 
 

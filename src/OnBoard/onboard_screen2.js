@@ -105,21 +105,7 @@ const Onboard_screen2 = (props) => {
           </View>
         </View>
         
-        {/* <View style={styles.container3}> */}
-        {/* <View style={{ paddingVertical: "4%", paddingTop: "5%" }}>
-            <Text style={styles.head2}> Enter your Password</Text>
-            <TextInput
-              secureTextEntry={true}
-              value={password}
-              style={styles.input}
-              placeholder={"  Enter Here"}
-              onChangeText={(val) => {
-                // console.log("changed password");
-                setPass(val);
-              }}
-            />
-          </View>
-        </View> */}
+
 
         <View style={styles.navigation}>
           <View style={styles.navigation_control}>

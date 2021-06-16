@@ -58,7 +58,7 @@ const Onboard_screen3 = (props) => {
 
 
   const submitHandler = () => {
-    if (!isValid()) { return false }
+    // if (!isValid()) { return false }
     props.navigation.navigate("SignUp_4", { ...props.route.params, password });
   };
 
@@ -89,7 +89,7 @@ const Onboard_screen3 = (props) => {
               label={'Enter your Password'}
               secureTextEntry={true}
               placeholder={'Enter here'}
-              placeholderTextColor={ _setPlaceHolderColor("password", errorField) }
+              // placeholderTextColor={ _setPlaceHolderColor("password", errorField) }
               onChangeText={ setPass }
               error={errorField === "password" && errorFieldMessage}
             >
@@ -97,15 +97,15 @@ const Onboard_screen3 = (props) => {
           </View>
 
           <View style={styles.field_group}>
-            <InputField
+            {/* <InputField
               label={'Verify Password'}
               secureTextEntry={true}
               placeholder={'Enter here'}
-              placeholderTextColor={ _setPlaceHolderColor("vPassword", errorField) }
+              // placeholderTextColor={ _setPlaceHolderColor("vPassword", errorField) }
               onChangeText={ setvPass }
               error={errorField === "vPassword" && errorFieldMessage}
             >
-            </InputField>
+            </InputField> */}
           </View>
         </View>
 

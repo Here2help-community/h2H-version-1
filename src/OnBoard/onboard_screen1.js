@@ -175,22 +175,6 @@ const Onboard_screen1 = (props) => {
             >
             </InputField>
           </View>
-
-          <View style={styles.divider_container}>
-            <View style={styles.divider}></View>
-            <View style={{ width: '20%' }}><Text style={{ fontFamily: 'Lato-Regular', fontSize: 13, color: '#C8C8C8', alignSelf: 'center', }}>OR</Text></View>
-            <View style={styles.divider}></View>
-          </View>
-
-          <View
-            style={styles.oauth_group}
-          >
-            <Dark_Button
-              onPress={signIn}
-            >
-              GOOGLE
-            </Dark_Button>
-          </View>
         </View>
 
         <View style={styles.navigation}>

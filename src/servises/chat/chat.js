@@ -6,8 +6,6 @@ import { StyleSheet, View, Text, TextInput, Button, YellowBox } from 'react-nati
 import * as firebase from 'firebase'
 import 'firebase/firestore'
 
-import store_redux_thunk from '../../asyncStorage/store'
-import { SIGN_IN, SIGN_OUT, GOOGLE_AUTH, EMAIL_PASSWORD_AUTH, RESTORE_TOKEN } from "../../asyncStorage/actionsList";
 
 
 YellowBox.ignoreWarnings(['Setting a timer for a long period of time'])
@@ -16,15 +14,6 @@ const db = firebase.firestore()
 const chatsRef = db.collection('chats')
 
 const Chat_Screen = props => {
-
-  // make user uid as key
-  var user_from_auth = store_redux_thunk.getState().userToken;
-  // if a google user then target changes
-  if (store_redux_thunk.getState().authType === GOOGLE_AUTH) {
-    user_from_auth = user_from_auth.user;
-  }
-  const uid = user_from_auth.uid;
-  const username = user_from_auth.displayName;
 
 
   const [user, setUser] = useState(null)

@@ -1,13 +1,14 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import AppText from "../component/AppText/AppText";
 import Dark_Button from "../Items/Buttons/dark-bt";
+import Grey_Button from "../Items/Buttons/grey-bt";
 import Styles from "./OnboardStyles";
 
 import Colors from "../Items/Colors";
 import { ScrollView } from "react-native-gesture-handler";
 
-const Onboard_Create_Profile = (props) => {
+const Onboard_Add_Profile_Pic = (props) => {
   return (
     <ScrollView>
       <View style={styles.status_bar}>
@@ -17,28 +18,39 @@ const Onboard_Create_Profile = (props) => {
         <View style={styles.bar} />
       </View>
       <View style={styles.screen}>
-        <View style={styles.title}>
-          <AppText style={Styles.head}>Create your{"\n"}profile</AppText>
-        </View>
-
-        <View style={styles.container2}>
-          <TextInput style={styles.input} placeholder="First Name" />
-        </View>
-
-        <View style={styles.container3}>
-          <TextInput style={styles.input} placeholder="Last Name" />
-        </View>
-
-        <View style={styles.container4}>
-          <Dark_Button
+        <View style={styles.button}>
+          <Grey_Button
             onPress={() =>
-              props.navigation.navigate("OnboardingScreen_4", {
+              props.navigation.navigate("OnboardingScreen_6", {
                 ...props.route.params,
               })
             }
           >
-            Continue
-          </Dark_Button>
+            Skip
+          </Grey_Button>
+        </View>
+        <View style={styles.title}>
+          <AppText style={Styles.head}>Add profile{"\n"}photo</AppText>
+        </View>
+        <View style={styles.container2}>
+          <Image
+            source={require("./img/cameraIcon.png")}
+            resizeMode="contain"
+            style={{
+              // width: "100%",
+              // height: "100%",
+              alignSelf: "center",
+            }}
+          />
+        </View>
+
+        <View style={styles.container3}>
+          <Dark_Button>Add Photo</Dark_Button>
+        </View>
+        <View>
+          <AppText style={styles.container4}>
+            You can update or remove this from your {"\n"}profile at anytime
+          </AppText>
         </View>
       </View>
     </ScrollView>
@@ -72,12 +84,19 @@ const styles = StyleSheet.create({
   },
   container2: {
     paddingVertical: "5%",
+    // backgroundColor: "pink",
+    // width: 44,
+    // height: 44,
+    // borderRadius: 44 / 2,
   },
   container3: {
-    paddingVertical: "8%",
+    paddingVertical: "10%",
   },
   container4: {
-    paddingVertical: "8%",
+    textAlign: "center",
+  },
+  button: {
+    alignItems: "flex-end",
   },
   head: {
     fontSize: 40,
@@ -91,8 +110,8 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.primary2,
   },
   title: {
-    paddingVertical: "12%",
+    paddingVertical: "5%",
   },
 });
 
-export default Onboard_Create_Profile;
+export default Onboard_Add_Profile_Pic;

@@ -1,17 +1,23 @@
-import React from 'react';
-import { StyleSheet, View, Image, Platform, TouchableOpacity } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from "react";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   createStackNavigator,
   CardStyleInterpolators,
   TransitionPresets,
-} from '@react-navigation/stack';
+} from "@react-navigation/stack";
 
-import Volunteer from '../component/Volunteer';
-import Victim from '../component/Help-need';
-import Chat_Screen from '../servises/chat/chat';
-import Browsing_Screen from '../servises/browsing-requests/browsing-screen';
-import Request_Screen from '../servises/request-screen/request-screen';
+import Volunteer from "../component/Volunteer";
+import Victim from "../component/Help-need";
+import Chat_Screen from "../servises/chat/chat";
+import Browsing_Screen from "../servises/browsing-requests/browsing-screen";
+import Request_Screen from "../servises/request-screen/request-screen";
 
 import ProfileScreen from '../component/profile/Profile';
 import FeedbackScreen from '../component/profile/Feedback';
@@ -20,8 +26,8 @@ import Terms_component from '../component/profile/Terms';
 import PrivacyScreen from '../component/profile/Privacy';
 import EditProfileScreen from '../component/profile/EditProfile';
 
-import Colors from '../Items/Colors';
-import AppText from '../component/AppText/AppText';
+import Colors from "../Items/Colors";
+import AppText from "../component/AppText/AppText";
 
 import Svg, {
   Circle,
@@ -45,7 +51,7 @@ import Svg, {
   ClipPath,
   Pattern,
   Mask,
-} from 'react-native-svg';
+} from "react-native-svg";
 
 const ScreenConstant = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,17 +59,19 @@ const Tab = createBottomTabNavigator();
 const tabBarLabelOpts = (label) => {
   return ({ focused, color }) => {
     return (
-      <AppText style={{
-        fontSize: 12,
-        color: Colors.primary1,
-        transform: [{ translateY: -12, }],
-        textAlign: 'center',
-      }}>
+      <AppText
+        style={{
+          fontSize: 12,
+          color: Colors.primary1,
+          transform: [{ translateY: -12 }],
+          textAlign: "center",
+        }}
+      >
         {label}
       </AppText>
     );
-  }
-}
+  };
+};
 
 function Profile_component() {
   return(
@@ -86,62 +94,70 @@ function Profile_component() {
   )
 }
 
-
 export default function MyTabs(props) {
-
   return (
-    <Tab.Navigator 
-      initialRouteName='Home'
+    <Tab.Navigator
+      initialRouteName="Home"
       tabBarOptions={{
         activeTintColor: Colors.primary1,
         inactiveTintColor: Colors.inactive,
         style: {
-          backgroundColor: '#FFFFFE',
-          height: Platform.OS === "ios" ? 100 : 70,
-          bottom: Platform.OS === 'ios' ? 12 : 0,
-        }
+          backgroundColor: "#FFFFFE",
+          height: Platform.OS === "ios" ? 100 : 85,
+          marginTop: 20,
+          paddingTop: 7,
+          paddingBottom: 5,
+        },
       }}
     >
-      <Tab.Screen 
+      <Tab.Screen
         options={{
-          tabBarIcon: ({ focused, color, size }) => { 
+          tabBarIcon: ({ focused, color, size }) => {
             return (
               <Image
-                source={focused ? require('../Items/Icons/home_active.png') : require('../Items/Icons/home_inactive.png')}
+                source={
+                  focused
+                    ? require("../Items/Icons/home_active.png")
+                    : require("../Items/Icons/home_inactive.png")
+                }
                 style={styles.image}
               />
-            )
+            );
           },
-          tabBarLabel: tabBarLabelOpts('Home'),
-        }} 
-        name='Home' 
-        component={Volunteer} 
+          tabBarLabel: tabBarLabelOpts("Home"),
+        }}
+        name="Home"
+        component={Volunteer}
       />
-      <Tab.Screen 
+      <Tab.Screen
         options={{
-          tabBarIcon: ({ focused, color, size }) => { 
+          tabBarIcon: ({ focused, color, size }) => {
             return (
               <Image
-                source={focused ? require('../Items/Icons/browse_active.png') : require('../Items/Icons/browse_inactive.png')}
+                source={
+                  focused
+                    ? require("../Items/Icons/browse_active.png")
+                    : require("../Items/Icons/browse_inactive.png")
+                }
                 style={styles.image}
               />
-            )
+            );
           },
-          tabBarLabel: tabBarLabelOpts('Browse'),
-        }} 
-        name='Browse' 
-        component={Browsing_Screen} 
+          tabBarLabel: tabBarLabelOpts("Browse"),
+        }}
+        name="Browse"
+        component={Browsing_Screen}
       />
-      <Tab.Screen 
+      <Tab.Screen
         options={{
-          tabBarIcon: ({ focused, color, size }) => { 
-            const width = size*2;
+          tabBarIcon: ({ focused, color, size }) => {
+            const width = size * 2;
             const height = width;
-            const borderRadius = width*0.5;
+            const borderRadius = width * 0.5;
 
-            const shadow_width = width*1.4;
-            const shadow_height = height*1.4;
-            const shadow_radius = shadow_width*0.5;
+            const shadow_width = width * 1.4;
+            const shadow_height = height * 1.4;
+            const shadow_radius = shadow_width * 0.5;
 
             return (
               <View
@@ -149,8 +165,8 @@ export default function MyTabs(props) {
                   borderRadius: shadow_radius,
                   width: shadow_width,
                   height: shadow_height,
-                  justifyContent: 'center',
-                  transform: [{ translateY: -size*0.75, }],
+                  justifyContent: "center",
+                  transform: [{ translateY: -size * 0.75 }],
                 }}
               >
                 <View
@@ -159,105 +175,136 @@ export default function MyTabs(props) {
                     borderRadius: borderRadius,
                     width: width,
                     height: height,
-                    justifyContent: 'center',
+                    justifyContent: "center",
                     // transform: [{ translateY: -size*0.75, }],
-                    alignSelf: 'center',
+                    alignSelf: "center",
                     shadowColor: "#7F89AD",
                     shadowOpacity: 0.5,
-                    shadowRadius: width*0.3,
+                    shadowRadius: width * 0.3,
                   }}
                 >
                   <AppText
                     style={{
-                      color: 'white',
-                      fontSize: size*1.5,
-                      textAlign: 'center',
+                      color: "white",
+                      fontSize: size * 1.5,
+                      textAlign: "center",
                     }}
-                  >+</AppText>
+                  >
+                    +
+                  </AppText>
                 </View>
-                { Platform.OS !== 'ios' ? 
-                  <View style={{
-                    position: 'absolute',
-                  }}>
-                    <TouchableOpacity 
-                      activeOpacity={0} 
-                      onPress={() => { props.navigation.navigate('Request') }}
+                {Platform.OS !== "ios" ? (
+                  <View
+                    style={{
+                      position: "absolute",
+                    }}
+                  >
+                    <TouchableOpacity
+                      activeOpacity={0}
+                      onPress={() => {
+                        props.navigation.navigate("Request");
+                      }}
                     >
                       <Svg width={shadow_width} height={shadow_height}>
                         <Defs>
                           <RadialGradient
-                            id='grad'
-                            cx='50%'
-                            cy='50%'
-                            rx='50%'
-                            ry='50%'
-                            fx='50%'
-                            fy='50%'
-                            gradientUnits='userSpaceOnUse'
+                            id="grad"
+                            cx="50%"
+                            cy="50%"
+                            rx="50%"
+                            ry="50%"
+                            fx="50%"
+                            fy="50%"
+                            gradientUnits="userSpaceOnUse"
                           >
-                            <Stop offset='0%' stopColor='#7F89AD' stopOpacity='0' />
-                            <Stop offset='80%' stopColor='#7F89AD' stopOpacity='0.3' />
-                            <Stop offset='100%' stopColor='#7F89AD' stopOpacity='0' />
+                            <Stop
+                              offset="0%"
+                              stopColor="#7F89AD"
+                              stopOpacity="0"
+                            />
+                            <Stop
+                              offset="80%"
+                              stopColor="#7F89AD"
+                              stopOpacity="0.3"
+                            />
+                            <Stop
+                              offset="100%"
+                              stopColor="#7F89AD"
+                              stopOpacity="0"
+                            />
                           </RadialGradient>
                         </Defs>
-                        <Circle cx={shadow_radius} cy={shadow_radius} r={shadow_radius} fill='url(#grad)' />
+                        <Circle
+                          cx={shadow_radius}
+                          cy={shadow_radius}
+                          r={shadow_radius}
+                          fill="url(#grad)"
+                        />
                       </Svg>
                     </TouchableOpacity>
                   </View>
-                  :
-                  <View style={{ position: 'absolute' }}></View>
-                }
+                ) : (
+                  <View style={{ position: "absolute" }}></View>
+                )}
               </View>
-            )
+            );
           },
-          tabBarLabel: tabBarLabelOpts('Create Request'),
-        }} 
-        name='Request' 
-        component={Request_Screen} 
+          tabBarLabel: tabBarLabelOpts("Create Request"),
+        }}
+        name="Request"
+        component={Request_Screen}
       />
-      <Tab.Screen 
+      <Tab.Screen
         options={{
-          tabBarIcon: ({ focused, color, size }) => { 
+          tabBarIcon: ({ focused, color, size }) => {
             return (
               <Image
-                source={focused ? require('../Items/Icons/chat_active.png') : require('../Items/Icons/chat_inactive.png')}
+                source={
+                  focused
+                    ? require("../Items/Icons/chat_active.png")
+                    : require("../Items/Icons/chat_inactive.png")
+                }
                 style={styles.image}
               />
-            )
+            );
           },
-          tabBarLabel: tabBarLabelOpts('Chat'),
+          tabBarLabel: tabBarLabelOpts("Chat"),
           tabBarBadge: null,
           tabBarBadgeStyle: {
             backgroundColor: Colors.error,
-            color: 'white',
-          }
-        }} 
-        name='Settings' 
-        component={Chat_Screen} 
+            color: "white",
+          },
+        }}
+        name="Settings"
+        component={Chat_Screen}
       />
-      <Tab.Screen 
+      <Tab.Screen
         options={{
-          tabBarIcon: ({ focused, color, size }) => { 
+          tabBarIcon: ({ focused, color, size }) => {
             return (
               <Image
-                source={focused ? require('../Items/Icons/profile_active.png') : require('../Items/Icons/profile_inactive.png')}
+                source={
+                  focused
+                    ? require("../Items/Icons/profile_active.png")
+                    : require("../Items/Icons/profile_inactive.png")
+                }
                 style={styles.image}
               />
-            )
+            );
           },
-          tabBarLabel: tabBarLabelOpts('Profile'),
-        }} 
-        name='Profile' 
-        component={Profile_component} 
+          tabBarLabel: tabBarLabelOpts("Profile"),
+        }}
+        name="Profile"
+        component={Profile_component}
       />
     </Tab.Navigator>
   );
-};
+}
 
 const styles = StyleSheet.create({
   image: {
-    width: Platform.OS === 'ios' ? 30 : 24,
-    height: Platform.OS === 'ios' ? 30 : 24,
-    resizeMode: 'contain',  
-  }
-})
+    width: Platform.OS === "ios" ? 30 : 24,
+    height: Platform.OS === "ios" ? 30 : 24,
+    resizeMode: "contain",
+  },
+});
