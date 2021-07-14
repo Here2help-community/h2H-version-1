@@ -34,30 +34,23 @@ const ItemSeparator = () => {
 const editProfilePic = async (setPhotoURL, option) => {
   try {
     if (Platform.OS !== 'web') { 
-      let permissionResponse = {}  
       if (option === TAKE_PHOTO)
-        permissionResponse = await ImagePicker.requestCameraPermissionsAsync();
+        const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (option === CHOOSE_PHOTO)
-        permissionResponse = await ImagePicker.requestCameraRollPermissionsAsync();
+        const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
 
-      if (permissionResponse.status !== 'granted') {
+      if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');
       }
     }
 
-    let result
-    const imageOpts = {
+    let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 1,
       base64: true,
       exif: true,
-    }
-    if (option === TAKE_PHOTO)
-      result = await ImagePicker.launchCameraAsync(imageOpts);
-
-    if (option === CHOOSE_PHOTO)
-      result = await ImagePicker.launchImageLibraryAsync(imageOpts);
+    });
 
     if (!result.cancelled) {
       setPhotoURL(result.uri);
@@ -367,13 +360,14 @@ const ProfileScreen = (props) => {
             details="Where would you like upload your photo from?"
             cancel="Choose from library"
             confirm="Take a photo"
-            icon="camera"
+            icon="trashCan"
             onClose={() => setShowAccessModal(false)}
             onCancel={() => { 
               editProfilePic(setPhotoURL, CHOOSE_PHOTO)
               setShowAccessModal(false)
             }}
             onConfirm={() => { 
+              console.log("TODO: Delete account") 
               editProfilePic(setPhotoURL, TAKE_PHOTO)
               setShowAccessModal(false)
             }}

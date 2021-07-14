@@ -2,7 +2,6 @@ import React from 'react'
 import { Pressable, TouchableOpacity, View } from 'react-native'
 import Svg, { G, Path } from 'react-native-svg'
 import AppText from '../AppText/AppText'
-import Camera from '../SVGs/Camera'
 import TrashCan from '../SVGs/TrashCan'
 import styles from './ModalStyles'
 
@@ -12,8 +11,6 @@ const Modal = (props) => {
     switch (props.icon) {
       case 'trashCan':
         return <TrashCan />
-      case 'camera':
-        return <Camera />
       
       default:
         return undefined
@@ -71,7 +68,7 @@ const Modal = (props) => {
       <View style={styles.options}>
         <TouchableOpacity
           style={styles.button}
-          onPress={props.onCancel}
+          onPress={props.onClose}
         >
           <AppText style={styles.cancel}>{props.cancel}</AppText>
         </TouchableOpacity>
