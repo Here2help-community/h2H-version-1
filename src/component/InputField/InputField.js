@@ -30,7 +30,7 @@ const InputField = (props) => {
           setText(text);
           props.onChangeText(text);
         } }
-        value={text}
+        value={props.value ? props.value : text}
         onFocus={ (e) => { setIsFocused(true) } }
         onBlur={ (e) => { setIsFocused(false) } }
         spellCheck={ props.spellCheck || false }

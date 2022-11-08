@@ -7,8 +7,11 @@ export default{
   secondary_light: '#FDFDFD',
   secondary2: '#3A3C42',
   secondary3: '#64666D',
-  secondary4: '#4F4F4F',
   accent: '#EF2327',
+  tint: '#011138AC',
+
+  background: '#FFFFFF',
+  background_2: '#F9F9F9',
 
   //colors for button
   button: '#000000',
@@ -28,5 +31,15 @@ export default{
   
   inactive_picker: '#9A99A2',
   picker_border: '#E6E4EA',
+
+  item_border: '#D8D9DA',
+  
+  profile_item_text: '#4F4F4F',
+  profile_bio_text: '#333333',
+
+  switch_disabled: '#78788029',
+  switch_enabled: '#2D375B',
+
+  modal_options_border: '#E0E0E0',
 
 }

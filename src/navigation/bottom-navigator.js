@@ -19,11 +19,12 @@ import Chat_Screen from "../servises/chat/chat";
 import Browsing_Screen from "../servises/browsing-requests/browsing-screen";
 import Request_Screen from "../servises/request-screen/request-screen";
 
-import ProfileScreen from "../component/profile/profile";
-import FeedbackScreen from "../component/profile/submit";
-import SubmitScreen from "../component/profile/settings";
-import Terms_component from "../component/profile/terms";
-import PrivacyScreen from "../component/profile/privacy";
+import ProfileScreen from '../component/profile/Profile';
+import FeedbackScreen from '../component/profile/Feedback';
+import SettingsScreen from '../component/profile/Settings';
+import Terms_component from '../component/profile/Terms';
+import PrivacyScreen from '../component/profile/Privacy';
+import EditProfileScreen from '../component/profile/EditProfile';
 
 import Colors from "../Items/Colors";
 import AppText from "../component/AppText/AppText";
@@ -73,23 +74,24 @@ const tabBarLabelOpts = (label) => {
 };
 
 function Profile_component() {
-  return (
-    <ScreenConstant.Navigator
-      screenOptions={{
-        headerShown: false,
-        gestureEnabled: true,
-        gestureDirection: "horizontal",
-        cardOverlayEnabled: true,
-        ...TransitionPresets.SlideFromRightIOS,
-      }}
-    >
-      <ScreenConstant.Screen name="profile" component={ProfileScreen} />
-      <ScreenConstant.Screen name="feedback" component={FeedbackScreen} />
-      <ScreenConstant.Screen name="submit" component={SubmitScreen} />
-      <ScreenConstant.Screen name="terms" component={Terms_component} />
-      <ScreenConstant.Screen name="privacy" component={PrivacyScreen} />
-    </ScreenConstant.Navigator>
-  );
+  return(
+
+  <ScreenConstant.Navigator
+    screenOptions={{
+      headerShown: false,
+      gestureEnabled: true,
+      gestureDirection: 'horizontal',
+      cardOverlayEnabled: true,
+      ...TransitionPresets.SlideFromRightIOS,
+    }}> 
+      <ScreenConstant.Screen name='profile' component={ProfileScreen} />
+      <ScreenConstant.Screen name='feedback' component={FeedbackScreen} />
+      <ScreenConstant.Screen name='settings' component={SettingsScreen} />
+      <ScreenConstant.Screen name='terms' component={Terms_component} />
+      <ScreenConstant.Screen name='privacy' component={PrivacyScreen} />
+      <ScreenConstant.Screen name='editProfile' component={EditProfileScreen} />
+  </ScreenConstant.Navigator>
+  )
 }
 
 export default function MyTabs(props) {

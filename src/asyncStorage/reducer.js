@@ -51,6 +51,7 @@ export default function Reducer(state = initial_state, action) {
         isSignedOut: false,
         isLoading: false,
         hasAccount: true,
+        user: action.user,
       }
     }
     else if (action.type ==='showload') {
